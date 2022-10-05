@@ -15,7 +15,7 @@ calendar: !include calendar.yaml
 
 nest:
   client_id: 908825213401-ghdq8n23odueenmrsp4bhuqas25cutcn.apps.googleusercontent.com
-  client_secret: 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
+  client_secret: !secret nest_client_secret
   # "Project ID" in the Device Access Console (not Cloud Project ID!)
   project_id: 5782062e-da43-4cbe-bdb5-0e45bc0df826
 

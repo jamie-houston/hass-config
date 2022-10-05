@@ -1,0 +1,91 @@
+blueprint:
+  name: Batteries Warning
+  description: Regularly test all sensors with 'battery' device-class for crossing
+    a certain battery level threshold or unseen sensor and if so execute an action.
+  domain: automation
+  input:
+    threshold:
+      name: Battery warning level threshold
+      description: Battery sensors below threshold are assumed to be low-battery (as
+        well as binary battery sensors with value 'on').
+      default: 20
+      selector:
+        number:
+          min: 5.0
+          max: 100.0
+          unit_of_measurement: '%'
+          mode: slider
+          step: 5.0
+    last_seen:
+      name: Battery last seen duration in days
+      description: Battery sensors not seen since the number of daysare assumed to
+        be low-battery.
+      default: 3
+      selector:
+        number:
+          min: 1.0
+          max: 30.0
+          unit_of_measurement: days
+          mode: slider
+          step: 1.0
+    time:
+      name: Time to test on
+      description: Test is run at configured time
+      default: '10:00:00'
+      selector:
+        time: {}
+    day:
+      name: Weekday to test on
+      description: 'Test is run at configured time either everyday (0) or on a given
+        weekday (1: Monday ... 7: Sunday)'
+      default: 0
+      selector:
+        number:
+          min: 0.0
+          max: 7.0
+          mode: slider
+          step: 1.0
+    exclude:
+      name: Excluded Sensors
+      description: Battery sensors (e.g. smartphone) to exclude from detection. Only
+        entities are supported, devices must be expanded!
+      default:
+        entity_id: []
+      selector:
+        target:
+          entity:
+            device_class: battery
+    actions:
+      name: Actions
+      description: Notifications or similar to be run. {{sensors}} is replaced with
+        the names of sensors being low on battery.
+      selector:
+        action: {}
+  source_url: https://gist.github.com/dadge/9fb889923b10000d592790167c1d7423
+variables:
+  day: !input day
+  threshold: !input threshold
+  exclude: !input exclude
+  last_seen: !input last_seen
+  sensors: "{% set result = namespace(sensors=[]) %} {% set last_seen_in_s = last_seen*24*60*60
+    %} {% for state in states.sensor | selectattr('attributes.device_class', '==',
+    'battery') %}\n  {% if 0 <= state.state | int(-1) < threshold | int and not state.entity_id
+    in exclude.entity_id %}\n    {% set result.sensors = result.sensors + [ state.name
+    ~ ' (' ~ state.state ~ ' %)'] %}\n  {% endif %}\n    {% if state_attr(state.entity_id,
+    'last_seen') and state_attr(state.entity_id, 'last_seen')/1000 - as_timestamp(now())
+    + last_seen_in_s < 0 %}\n          {% set result.sensors = result.sensors + [
+    state.name ~ ' ( not seen since ' ~ as_datetime((state_attr(state.entity_id, 'last_seen')/1000)).strftime('%x')
+    ~ ')'] %}\n      {% endif %}\n{% endfor %} {% for state in states.binary_sensor
+    | selectattr('attributes.device_class', '==', 'battery') | selectattr('state',
+    '==', 'on') %}\n  {% if not state.entity_id in exclude.entity_id %}\n    {% set
+    result.sensors = result.sensors + [ state.name] %}\n  {% endif %}\n{% endfor %}
+    {{result.sensors|join(', ')}}"
+trigger:
+- platform: time
+  at: !input time
+condition:
+- '{{ sensors != '''' and (day | int == 0 or day | int == now().isoweekday()) }}'
+action:
+- choose: []
+  default: !input actions
+mode: single
