@@ -1,0 +1,26 @@
+-== Watchman Report ==- 
+
+-== Congratulations, all 4 services from your config are available!
+
+-== Missing 6 entity(ies) from 75 found in your config:
++--------------------------------+---------+--------------------------------------------------------------+
+| Entity ID                      | State   | Location                                                     |
++--------------------------------+---------+--------------------------------------------------------------+
+| climate.hvac                   | missing | custom_components/ui_lovelace_minimalist/lovelace/ulm_templa |
+|                                |         | tes/popup_templates/popup_buttons/popup_button_airconditionn |
+|                                |         | er.yaml:22                                                   |
+| number.match                   | missing | custom_components/ui_lovelace_minimalist/lovelace/translatio |
+|                                |         | ns/default.yaml:17,27                                        |
+| sensor.fuhrmann_house_temp     | unavail | .storage/lovelace.mobile_dashboard:106,294                   |
+| ('Temp')                       |         |                                                              |
+| sensor.fuhrmann_house_feels_li | unavail | .storage/lovelace.mobile_dashboard:417                       |
+| ke ('Feels like')              |         |                                                              |
+| sensor.fuhrmann_house_wind_spe | unavail | .storage/lovelace.mobile_dashboard:444                       |
+| ed ('Wind speed')              |         |                                                              |
+| sensor.fuhrmann_house_weekly_r | unavail | .storage/lovelace.mobile_dashboard:459                       |
+| ain ('Weekly rain')            |         |                                                              |
++--------------------------------+---------+--------------------------------------------------------------+
+
+-== Report created on 02 Oct 2022 10:08:43
+-== Parsed 203 files in 4.69s., ignored 0 files 
+-== Generated in: 0.01s. Validated in: 0.00s.

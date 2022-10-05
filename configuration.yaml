@@ -1,0 +1,34 @@
+# Configure a default setup of Home Assistant (frontend, api, etc)
+default_config:
+
+recorder:
+  db_url: mysql://homeassistant:hayo31@core-mariadb/homeassistant?charset=utf8mb4
+# Text to speech
+tts:
+  - platform: google_translate
+
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+calendar: !include calendar.yaml
+
+nest:
+  client_id: 908825213401-ghdq8n23odueenmrsp4bhuqas25cutcn.apps.googleusercontent.com
+  client_secret: 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
+  # "Project ID" in the Device Access Console (not Cloud Project ID!)
+  project_id: 5782062e-da43-4cbe-bdb5-0e45bc0df826
+
+sensor: !include sensors.yaml
+
+# Used for Todoist card
+# https://github.com/grinstantin/todoist-card
+rest_command:
+  todoist:
+    method: post
+    url: "https://api.todoist.com/sync/v9/{{ url }}"
+    payload: !secret todoist_api_payload
+    content_type: "application/x-www-form-urlencoded"
+
+frontend:
+  themes: !include_dir_merge_named themes

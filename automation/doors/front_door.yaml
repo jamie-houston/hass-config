@@ -1,0 +1,38 @@
+- id: "1654370498791"
+  alias: Unlock back door when garage opens
+  description: ""
+  trigger:
+    - platform: device
+      device_id: 1579eced18a15363a26d17f2cce51d0f
+      domain: cover
+      entity_id: cover.garage_door_opener
+      type: opened
+  condition: []
+  action:
+    - device_id: 4a0e2215f9effd5201d8df743cccde28
+      domain: lock
+      entity_id: lock.touchscreen_deadbolt
+      type: unlock
+  mode: single
+- id: "1654919466319"
+  alias: Front Door Scenes
+  description: ""
+  use_blueprint:
+    path: fxlt/zen32-scene-controller-z-wave-js.yaml
+    input:
+      zooz_switch: 0ca9601b44374b3932e2e4d9f5627689
+      scene_1: []
+      scene_2:
+        - if:
+            - condition: sun
+              before: sunset
+          then:
+            - type: turn_on
+              device_id: 0ca9601b44374b3932e2e4d9f5627689
+              entity_id: light.front_porch_cans
+              domain: light
+          else:
+            - type: turn_off
+              device_id: 0ca9601b44374b3932e2e4d9f5627689
+              entity_id: light.front_porch_cans
+              domain: light

@@ -1,0 +1,104 @@
+art_room:
+  icon: ''
+  floor: Main Floor
+  disabled: false
+basement:
+  icon: ''
+  floor: Basement
+  disabled: false
+basement_bathroom:
+  icon: ''
+  floor: Basement
+  disabled: false
+basement_bedroom:
+  icon: ''
+  floor: Basement
+  disabled: false
+basement_play_room:
+  icon: ''
+  floor: Basement
+  disabled: false
+entryway:
+  icon: ''
+  floor: Main Floor
+  disabled: false
+family_room:
+  icon: ''
+  floor: Main Floor
+  disabled: false
+garage:
+  icon: ''
+  floor: Exterior
+  disabled: false
+girls_bathroom:
+  icon: ''
+  floor: Top Floor
+  disabled: false
+home_theater:
+  icon: ''
+  floor: Basement
+  disabled: false
+kitchen:
+  icon: ''
+  floor: Main Floor
+  disabled: false
+laundry_room:
+  icon: ''
+  floor: Top Floor
+  disabled: false
+main_floor:
+  icon: ''
+  floor: Main Floor
+  disabled: false
+main_floor_bathroom:
+  icon: ''
+  floor: Main Floor
+  disabled: false
+maker_space:
+  icon: ''
+  floor: Basement
+  disabled: false
+master_bethroom:
+  icon: ''
+  floor: Top Floor
+  disabled: false
+master_bedroom:
+  icon: ''
+  floor: Top Floor
+  disabled: false
+nola_s_bedroom:
+  icon: ''
+  floor: Top Floor
+  disabled: false
+office:
+  icon: ''
+  floor: Main Floor
+  disabled: false
+exterior:
+  icon: ''
+  floor: Exterior
+  disabled: false
+parker_s_bedroom:
+  icon: ''
+  floor: Top Floor
+  disabled: false
+server_room:
+  icon: ''
+  floor: Basement
+  disabled: false
+silas_s_bedroom:
+  icon: ''
+  floor: Top Floor
+  disabled: false
+top_floor:
+  icon: ''
+  floor: Top Floor
+  disabled: false
+top_floor_hallway:
+  icon: ''
+  floor: Top Floor
+  disabled: false
+master_bathroom:
+  icon: ''
+  floor: Top Floor
+  disabled: false

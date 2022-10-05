@@ -1,0 +1,50 @@
+# One entry for each beacon you want to track
+# - platform: mqtt_room
+#   device_id: "sd:0xfe9f"
+#   name: "Jamie Tag"
+#   state_topic: "espresense/devices/sd:0xfe9f"
+#   timeout: 60
+#   away_timeout: 120 # number of seconds after which the enitity will get status not_home
+# - platform: mqtt_room
+#   device_id: "apple:1005:9-12"
+#   name: "Jamie iPhone"
+#   state_topic: "espresense/devices/apple:1005:9-12"
+#   timeout: 60
+#   away_timeout: 120 # number of seconds after which the enitity will get status not_home
+- platform: mqtt_room
+  device_id: "iBeacon:a4220523-cfa8-4593-a1f0-75460c2e681a-100-1"
+  name: "Jamie S22"
+  state_topic: "espresense/devices/iBeacon:a4220523-cfa8-4593-a1f0-75460c2e681a-100-1"
+  timeout: 5
+  away_timeout: 120 # number of seconds after which the enitity will get status not_home
+- platform: systemmonitor
+  resources:
+    - type: disk_free
+    - type: load_15m
+    - type: load_5m
+    - type: load_1m
+    - type: memory_free
+    - type: memory_use
+    - type: processor_temperature
+    - type: processor_use
+- platform: rest
+  name: To-do List
+  method: GET
+  resource: "https://api.todoist.com/sync/v9/projects/get_data"
+  params:
+    token: !secret todoist_api_token
+    project_id: 2296895971
+  value_template: "{{ value_json['project']['id'] }}"
+  json_attributes:
+    - project
+    - items
+  scan_interval: 30
+- platform: template
+  sensors:
+    number_lights_on:
+      friendly_name: Number of lights on
+      value_template: >-
+        {{ states.light
+                 | selectattr("state","eq","on")
+               | list | count  }}
+      icon_template: mdi:lightbulb-group
