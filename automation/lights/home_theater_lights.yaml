@@ -1,0 +1,64 @@
+- id: "1655343909328"
+  alias: Walk out of Home Theater
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.jamie_s22
+      attribute: distance
+      above: "8"
+  condition: []
+  action:
+    - type: turn_off
+      device_id: 2460edda7fbbeb7d702ba74eef896b34
+      entity_id: light.home_theater_light
+      domain: light
+  mode: single
+- id: "1655392965026"
+  alias: Home Theater Light off when watching something
+  trigger:
+    - platform: device
+      device_id: 1d52216c126d3b76c4854515564d14d0
+      domain: media_player
+      entity_id: media_player.home_theater_appletv
+      type: playing
+  condition: []
+  action:
+    - type: turn_off
+      device_id: 2460edda7fbbeb7d702ba74eef896b34
+      entity_id: light.home_theater_light
+      domain: light
+  mode: single
+- id: "1655393092824"
+  alias: Home Theater Light on when turning off TV
+  trigger:
+    - platform: device
+      device_id: 4c107d4c06ee12191f9459046a1b25fd
+      domain: media_player
+      entity_id: media_player.denon_avr_x6400h
+      type: turned_off
+  condition: []
+  action:
+    - type: turn_on
+      device_id: 2460edda7fbbeb7d702ba74eef896b34
+      entity_id: light.home_theater_light
+      domain: light
+  mode: single
+- id: "1664759246970"
+  alias: "Home theater light with TV off "
+  trigger:
+    - type: occupied
+      platform: device
+      device_id: cebaa2dd2b84e6d55753dc58fd6fda59
+      entity_id: binary_sensor.nest_protect_home_theater_occupancy
+      domain: binary_sensor
+  condition:
+    - condition: device
+      device_id: 1d52216c126d3b76c4854515564d14d0
+      domain: media_player
+      entity_id: media_player.home_theater_appletv
+      type: is_off
+  action:
+    - type: turn_on
+      device_id: 2460edda7fbbeb7d702ba74eef896b34
+      entity_id: light.home_theater_light
+      domain: light
+  mode: single

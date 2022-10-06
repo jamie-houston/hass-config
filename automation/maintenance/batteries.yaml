@@ -1,0 +1,24 @@
+- id: "1665000502764"
+  alias: Batteries Warning
+  use_blueprint:
+    path: Low Battery Warning.yaml
+    input:
+      actions:
+        - service: media_player.play_media
+          target:
+            entity_id: media_player.house_audio
+          data:
+            media_content_id: media-source://tts/google_translate?message=Battery+is+low+on+%7B%7B+sensors+%7D%7D+-+Tell+Jamie
+            media_content_type: provider
+          metadata:
+            title: Battery is low on {{ sensors }} - Tell Jamie
+            thumbnail: https://brands.home-assistant.io/_/google_translate/logo.png
+            media_class: app
+            children_media_class:
+            navigateIds:
+              - {}
+              - media_content_type: app
+                media_content_id: media-source://tts
+              - media_content_type: provider
+                media_content_id: media-source://tts/google_translate?message=Battery+is+low+on+%7B%7B+sensors+%7D%7D+-+Tell+Jamie
+      time: "10:00:00"

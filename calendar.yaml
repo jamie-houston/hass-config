@@ -1,6 +1,0 @@
-- platform: todoist
-  token: 1732123211a2412c71cecb7e5ba65dce88b8735d
-  custom_projects:
-    - name: "Home Assistant"
-      include_projects:
-        - Ideas

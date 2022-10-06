@@ -1,0 +1,23 @@
+# Used for Todoist card
+# https://github.com/grinstantin/todoist-card
+
+sensor:
+  - platform: rest
+    name: To-do List
+    method: GET
+    resource: "https://api.todoist.com/sync/v9/projects/get_data"
+    params:
+      token: !secret todoist_api_token
+      project_id: 2296895971
+    value_template: "{{ value_json['project']['id'] }}"
+    json_attributes:
+      - project
+      - items
+    scan_interval: 30
+
+rest_command:
+  todoist:
+    method: post
+    url: "https://api.todoist.com/sync/v9/{{ url }}"
+    payload: !secret todoist_api_payload
+    content_type: "application/x-www-form-urlencoded"

@@ -1,0 +1,35 @@
+- id: "1655674408251"
+  alias: Jamie Enters Office
+  description: ""
+  trigger:
+    - platform: state
+      entity_id:
+        - sensor.jamie_s22
+      to: office
+      from: kitchen
+  condition: []
+  action:
+    - device_id: eedfc70c639a2a6fcaad5b213e35458c
+      domain: mobile_app
+      type: notify
+      message: You're in your office
+  mode: single
+- id: "1656290951933"
+  alias: Walk into Office
+  description: ""
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.jamie_s22
+      attribute: distance
+      below: "4"
+  condition:
+    - condition: state
+      entity_id: sensor.jamie_s22
+      attribute: friendly_name
+      state: office
+  action:
+    - type: turn_on
+      device_id: 03f2f866c2dbb37d416b4d6e4cb586dc
+      entity_id: light.z_wave_plus_700_series_dimmer_switch
+      domain: light
+  mode: single

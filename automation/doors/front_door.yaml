@@ -1,22 +1,5 @@
-- id: "1654370498791"
-  alias: Unlock back door when garage opens
-  description: ""
-  trigger:
-    - platform: device
-      device_id: 1579eced18a15363a26d17f2cce51d0f
-      domain: cover
-      entity_id: cover.garage_door_opener
-      type: opened
-  condition: []
-  action:
-    - device_id: 4a0e2215f9effd5201d8df743cccde28
-      domain: lock
-      entity_id: lock.touchscreen_deadbolt
-      type: unlock
-  mode: single
 - id: "1654919466319"
   alias: Front Door Scenes
-  description: ""
   use_blueprint:
     path: fxlt/zen32-scene-controller-z-wave-js.yaml
     input:
