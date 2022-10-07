@@ -31,6 +31,7 @@ examples
 - light.stairs_down
 - sensor.server_room_temperature
 - media_player.art_room_speaker
+- lock.backdoor
 
 ### Possible Domains
 
@@ -47,6 +48,7 @@ examples
 ### Possible Purposes
 
 - motion
+- battery
 - power_usage
 - speaker (not needed with media_player)?
 - temperature

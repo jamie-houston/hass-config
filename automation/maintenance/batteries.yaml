@@ -6,7 +6,7 @@
       actions:
         - service: media_player.play_media
           target:
-            entity_id: media_player.house_audio
+            entity_id: media_player.home_chromecast
           data:
             media_content_id: media-source://tts/google_translate?message=Battery+is+low+on+%7B%7B+sensors+%7D%7D+-+Tell+Jamie
             media_content_type: provider

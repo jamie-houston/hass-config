@@ -1,0 +1,17 @@
+type: custom:mushroom-template-card
+primary: Basement
+secondary: >
+  {{expand(state_attr('light.basement_lights', 'entity_id'))|
+  selectattr('state','eq','on')|map(attribute='entity_id')|list|count}}
+  lights on
+icon: mdi:home
+entity: light.basement_lights
+layout: vertical
+tap_action:
+  action: navigate
+  navigation_path: basement
+badge_color: ""
+icon_color: >-
+  {% if (expand(state_attr('light.basement_lights', 'entity_id'))|
+  selectattr('state','eq','on')|map(attribute='entity_id')|list|count
+  == 0) %} green {% else %} yellow {% endif %}

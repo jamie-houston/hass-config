@@ -16,6 +16,7 @@ group: !include groups.yaml
 automation: !include_dir_merge_list automation
 script: !include scripts.yaml
 scene: !include scenes.yaml
+light: !include light_groups.yaml
 
 nest:
   client_id: !secret nest_client_id
@@ -27,3 +28,14 @@ sensor: !include sensors.yaml
 
 frontend:
   themes: !include_dir_merge_named themes
+
+lovelace:
+  mode: storage
+  # Add yaml dashboards
+  dashboards:
+    lovelace-yaml:
+      mode: yaml
+      title: Landing
+      icon: mdi:script
+      show_in_sidebar: true
+      filename: ui/dashboard/landing.yaml

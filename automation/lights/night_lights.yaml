@@ -1,67 +1,27 @@
-- id: "1635120095657"
-  alias: Night Lights On
-  description: "Turn on lights at night"
+- alias: Night Lights On
   trigger:
     - platform: sun
       event: sunset
-      offset: -00:45:00
+      offset: "-00:30:00"
   condition: []
   action:
-    - type: turn_on
-      device_id: 72098e3be641ae38ac321c0bdde7c382
-      entity_id: switch.black_smart_plug
-      domain: switch
-    - type: turn_on
-      device_id: 23b8b981edb56926ed5dbdd1eb0ae061
-      entity_id: switch.white_outdoor_plug_1
-      domain: switch
-    - type: turn_on
-      device_id: 845fd7213af79f347ac7b87f56611075
-      entity_id: light.front_porch_sconces
-      domain: light
-    - type: turn_on
-      device_id: d45fe2e810794abef59494d01cf9267c
-      entity_id: light.entryway_light
-      domain: light
-    - type: turn_on
-      device_id: 0ca9601b44374b3932e2e4d9f5627689
-      entity_id: light.front_porch_cans
-      domain: light
-    - type: turn_on
-      device_id: 346bb2426e72599e477a9da8d71b6cab
-      entity_id: light.back_door_sconces
-      domain: light
+    - service: light.turn_on
+      data: {}
+      target:
+        entity_id:
+          - light.night_lights
+          - light.holiday_lights
   mode: single
-- id: "1637542497005"
-  alias: Night Lights Off
-  description: "Turn outside lights off"
+
+- alias: Night Lights Off
   trigger:
     - platform: time
-      at: "22:30:00"
+      at: "22:00:00"
   condition: []
   action:
-    - type: turn_off
-      device_id: 72098e3be641ae38ac321c0bdde7c382
-      entity_id: switch.black_smart_plug
-      domain: switch
-    - type: turn_off
-      device_id: 23b8b981edb56926ed5dbdd1eb0ae061
-      entity_id: switch.white_outdoor_plug_1
-      domain: switch
-    - type: turn_off
-      device_id: 346bb2426e72599e477a9da8d71b6cab
-      entity_id: light.back_door_sconces
-      domain: light
-    - type: turn_off
-      device_id: df9c9f05617a2fe7f6e093b36b239ca2
-      entity_id: switch.back_porch_lights
-      domain: switch
-    - type: turn_off
-      device_id: 845fd7213af79f347ac7b87f56611075
-      entity_id: light.front_porch_sconces
-      domain: light
-    - type: turn_off
-      device_id: 0ca9601b44374b3932e2e4d9f5627689
-      entity_id: switch.front_porch_cans
-      domain: switch
+    - service: light.turn_off
+      data: {}
+      target:
+        entity_id:
+          - light.exterior_lights
   mode: single

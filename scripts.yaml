@@ -1,9 +1,9 @@
 toggle_ht_lights:
   sequence:
-  - type: toggle
-    device_id: 2460edda7fbbeb7d702ba74eef896b34
-    entity_id: light.home_theater_light
-    domain: light
+    - type: toggle
+      device_id: 2460edda7fbbeb7d702ba74eef896b34
+      entity_id: light.home_theater
+      domain: light
   mode: single
   alias: Toggle ht lights
   icon: mdi:brightness-6

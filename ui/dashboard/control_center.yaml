@@ -1,0 +1,18 @@
+views:
+  - theme: Backend-selected
+    title: Home
+    icon: mdi:home
+    badges: []
+    cards:
+type: custom:auto-entities
+show_empty: false
+card:
+  type: glance
+  title: Lights on
+filter:
+  include:
+    - domain: light
+      state: "on" # Remember that "on" and "off" are magic in yaml, and must always be quoted
+      options:
+        tap_action:
+          action: toggle

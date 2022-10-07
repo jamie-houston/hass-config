@@ -4,7 +4,7 @@
     - platform: device
       type: turned_on
       device_id: b6d35644182fead040d39b098c0a42ee
-      entity_id: light.server_room_light
+      entity_id: light.server_room
       domain: light
       for:
         hours: 0
@@ -14,6 +14,17 @@
   action:
     - type: turn_off
       device_id: b6d35644182fead040d39b098c0a42ee
-      entity_id: light.server_room_light
+      entity_id: light.server_room
       domain: light
   mode: single
+
+- id: '1665076589342'
+  alias: Server room motion light
+  description: ''
+  use_blueprint:
+    path: homeassistant/motion_light.yaml
+    input:
+      motion_entity: binary_sensor.server_room_motion
+      light_target:
+        device_id: b6d35644182fead040d39b098c0a42ee
+      no_motion_wait: 180

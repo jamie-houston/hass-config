@@ -1,0 +1,109 @@
+- platform: group
+  name: Front Yard Lights
+  entities:
+    - light.front_door
+    - light.front_porch_can
+
+- platform: group
+  name: Backyard Lights
+  entities:
+    - light.back_porch
+    - light.driveway
+    - light.backyard_string
+
+- platform: group
+  name: Holiday Lights
+  entities:
+    - light.front_porch_plug_white
+    - light.front_porch_plug_black
+
+- platform: group
+  name: Night Lights
+  entities:
+    - light.front_yard_lights
+    - light.foyer
+    - light.driveway
+
+- platform: group
+  name: Exterior Lights
+  entities:
+    - light.backyard_lights
+    - light.front_yard_lights
+    - light.holiday_lights
+
+- platform: group
+  name: Basement Lights
+  entities:
+    - light.server_room
+    - light.basement_bedroom
+    - light.basement_play_room
+    - light.basement_bathroom
+    - light.home_theater
+    - light.maker_space
+
+- platform: group
+  name: Master Bathroom Lights
+  entities:
+    - light.master_bathroom
+    - light.master_bathroom_shower
+    - light.master_bathroom_toilet
+    - light.jamie_closet
+
+- platform: group
+  name: Master Bedroom Lights
+  entities:
+    - light.master_bedroom_can
+    - light.master_bedroom_center
+    - light.lisa_closet
+
+- platform: group
+  name: Top Floor Lights
+  entities:
+    - light.girls_bathroom
+    - light.girls_bathroom_toilet
+    - light.nola_bedroom
+    - light.parker_bedroom
+    - light.parker_closet
+    - light.laundry_room
+    - light.top_floor_hallway
+    - light.master_bedroom_lights
+    - light.master_bathroom_lights
+    - light.silas_bathroom
+    - light.silas_bedroom
+
+- platform: group
+  name: Kitchen Lights
+  entities:
+    - light.kitchen_pantry
+    - light.kitchen_breakfast_nook
+    - light.kitchen_can
+    - light.kitchen_counter
+    - light.mud_room
+    - light.kitchen_island
+
+- platform: group
+  name: Office Lights
+  entities:
+    - light.office_can
+    - light.office_center
+
+- platform: group
+  name: Main Floor Lights
+  entities:
+    - light.kitchen_lights
+    - light.office_lights
+    - light.art_room
+    - light.family_room
+    - light.stairs_up
+    - light.stairs_down
+    - light.foyer
+    - light.main_floor_bathroom
+    - light.main_floor_closet
+
+- platform: group
+  name: All House Lights
+  entities:
+    - light.basement_lights
+    - light.main_floor_lights
+    - light.top_floor_lights
+    - light.exterior_lights

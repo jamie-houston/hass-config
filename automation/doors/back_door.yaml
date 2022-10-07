@@ -2,14 +2,14 @@
   alias: Unlock back door when garage opens
   trigger:
     - platform: device
-      device_id: 1579eced18a15363a26d17f2cce51d0f
+      device_id: garage-door-opened-trigger-for-back-door
       domain: cover
-      entity_id: cover.garage_door_opener
+      entity_id: cover.garage_door
       type: opened
   condition: []
   action:
-    - device_id: 4a0e2215f9effd5201d8df743cccde28
+    - device_id: back-door-unlocked-from-garage-door
       domain: lock
-      entity_id: lock.touchscreen_deadbolt
+      entity_id: lock.backdoor
       type: unlock
   mode: single
