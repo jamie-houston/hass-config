@@ -1,0 +1,22 @@
+type: custom:auto-entities
+show_empty: true
+card:
+  type: glance
+filter:
+  include:
+    - entity_id: light.*lights
+      options:
+        type: custom:mushroom-template-card
+        secondary: >
+          {{ state_attr(config.entity, "friendly_name") }}
+        primary: >-
+          {{expand(state_attr(config.entity, 'entity_id'))|
+            selectattr('state','eq','on')|map(attribute='entity_id')|list|count}}
+              lights on
+        icon: mdi:home
+        badge_color: ""
+        layout: vertical
+        icon_color: >-
+          {% if (expand(state_attr(config.entity, 'entity_id'))|
+          selectattr('state','eq','on')|map(attribute='entity_id')|list|count
+          == 0) %} green {% else %} yellow {% endif %}
