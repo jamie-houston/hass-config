@@ -4,15 +4,17 @@ views:
     icon: mdi:home
     badges: []
     cards:
-type: custom:auto-entities
-show_empty: false
-card:
-  type: glance
-  title: Lights on
-filter:
-  include:
-    - domain: light
-      state: "on" # Remember that "on" and "off" are magic in yaml, and must always be quoted
-      options:
-        tap_action:
-          action: toggle
+      - !include ../card/weather.yaml
+      - !include ../card/areas.yaml
+      - !include ../card/all_lights.yaml
+      - !include ../card/todo.yaml
+  - title: Temperature
+    subview: true
+    path: temperature
+    cards:
+      - !include ../card/temperature.yaml
+  - title: Server Room
+    subview: true
+    path: server_room
+    cards:
+      - !include ../card/areas.yaml

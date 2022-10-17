@@ -10,18 +10,18 @@
     - light.back_porch
     - light.driveway
     - light.backyard_string
+    - light.backyard_garage_string
 
 - platform: group
   name: Holiday Lights
   entities:
-    - light.front_porch_plug_white
     - light.front_porch_plug_black
 
 - platform: group
   name: Night Lights
   entities:
     - light.front_yard_lights
-    - light.foyer
+    - light.entryway
     - light.driveway
 
 - platform: group

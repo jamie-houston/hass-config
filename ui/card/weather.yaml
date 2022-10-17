@@ -1,0 +1,4 @@
+type: custom:simple-weather-card
+entity: weather.home
+name: at home
+backdrop: true

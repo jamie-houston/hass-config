@@ -1,0 +1,31 @@
+# Fill namespace with areas and turned on lights and swiches that toggle a "dumb bulb"
+{% set ns = namespace(areas=[], lights= expand(
+  states.light|selectattr('name','ne','All'),
+  states.switch|rejectattr('entity_id','match','switch.sonos')
+  ) | selectattr("state","eq","on") | list) %}
+
+{% for elm in ns.lights if not area_id(elm.entity_id) in ns.areas%}
+   {% set ns.areas = ns.areas + [area_id(elm.entity_id)] %}
+{%- endfor %}
+
+{% for area in ns.areas -%}
+
+**{{ area_name(area) }}**
+
+{% for elm in area_entities(area) if elm in ns.lights|map(attribute="entity_id") -%}
+
+{{ state_attr(elm, "friendly_name") }}
+
+{%- endfor %}
+
+{%- endfor %}
+
+
+
+
+On
+{% for state in states.light -%}
+  {% if ("lights" in state.entity_id) %}
+    Group {{ state.name | lower }} is {{state.state_with_unit}}
+  {% endif %}
+{%- endfor %}.

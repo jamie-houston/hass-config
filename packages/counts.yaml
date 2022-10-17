@@ -1,0 +1,27 @@
+sensor:
+  - platform: template
+    sensors:
+      number_lights_on:
+        friendly_name: Number of lights on
+        value_template: >-
+          {{ states.light
+                   | selectattr("state","eq","on")
+                 | list | count  }}
+        icon_template: mdi:lightbulb-group
+  # - platform: template
+  #   sensors:
+  #     all_light_groups:
+  #       friendly_name: "List of Light Groups"
+  #       value_template: >-
+  #         {% for state in states.light -%}
+  #           {% if (state.entity_id.endswith("lights")) %}
+  #             {{ state.entity_id }}
+  #           {% endif %}
+  #         {%- endfor %}
+  # - platform: template
+  #   sensors:
+  #     light_button_color:
+  #       value_template: >-
+  #         {% if (expand(state_attr(this, 'entity_id'))|
+  #         selectattr('state','eq','on')|map(attribute='entity_id')|list|count
+  #         == 0) %} green {% else %} yellow {% endif %}

@@ -53,6 +53,34 @@ examples
 - speaker (not needed with media_player)?
 - temperature
 
+### Find Entities by Convention
+
+To programmatically find entities in an area (room), use the same across areas
+
+`domain`.`area`[_group]
+
+- Temperature
+- Window Open
+- Lights
+- Fan
+- Motion
+- Media
+- Remote
+- Lock
+
+Example (Master Bedroom)
+- sensor.master_bedroom_temperature
+- sensor.master_bedroom_window
+- light.master_bedroom
+- fan.master_bedroom
+
+Example (Kitchen)
+- sensor.kitchen_temperature
+- sensor.kitchen_window
+- light.kitchen_lights
+- media_player.kitchen
+
+
 
 ### To contemplate
 Groups

@@ -1,0 +1,16 @@
+- id: '1665445926808'
+  alias: To floor hallway light
+  description: ''
+  trigger:
+  - type: occupied
+    platform: device
+    device_id: 7a271694c8a02d61384c08d571988a7a
+    entity_id: binary_sensor.top_floor_hallway_nest_protect_occupancy
+    domain: binary_sensor
+  condition: []
+  action:
+  - type: turn_on
+    device_id: c71e3da242134dd4b22c322b08f3cf17
+    entity_id: light.top_floor_hallway
+    domain: light
+  mode: single

@@ -33,6 +33,12 @@ lovelace:
   mode: storage
   # Add yaml dashboards
   dashboards:
+    control-yaml:
+      mode: yaml
+      title: Control
+      icon: mdi:script
+      show_in_sidebar: true
+      filename: ui/dashboard/control_center.yaml
     lovelace-yaml:
       mode: yaml
       title: Landing
