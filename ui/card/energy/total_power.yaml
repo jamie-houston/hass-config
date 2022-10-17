@@ -1,0 +1,10 @@
+type: gauge
+entity: sensor.none_balance_power_usage_1d
+name: Power Consumption
+severity:
+  green: 0
+  yellow: 15
+  red: 30
+needle: true
+min: 1
+max: 45

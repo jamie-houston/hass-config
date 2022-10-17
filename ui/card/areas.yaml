@@ -1,5 +1,6 @@
 type: entities
 entities:
+# main floor
   - entity: light.kitchen_lights
     type: custom:multiple-entity-row
     show_state: false
@@ -20,7 +21,30 @@ entities:
         name: temp
         tap_action: 
           action: navigate
-          navigation_path: temperature
+          navigation_path: climate
+  - entity: light.office_lights
+    type: custom:multiple-entity-row
+    show_state: false
+    name: Office
+    entities:
+      - entity: binary_sensor.office_window
+        state_color: true
+        icon: true
+        name: window
+      - entity: light. light.office_can
+        icon: true
+        name: can
+      - entity: light.office_center
+        icon: true
+        name: center
+      - entity: sensor.office_temperature
+        name: temp  
+        tap_action: 
+          action: navigate
+          navigation_path: climate
+
+  # top floor
+  - type: section
   - entity: light.master_bedroom_lights
     type: custom:multiple-entity-row
     name: Master Bedroom
@@ -39,7 +63,7 @@ entities:
         name: temp
         tap_action: 
           action: navigate
-          navigation_path: temperature
+          navigation_path: climate
   - entity: light.master_bathroom_lights
     type: custom:multiple-entity-row
     show_state: false
@@ -51,6 +75,54 @@ entities:
       - entity: light.master_bathroom_shower
         icon: true
         name: shower
+  - entity: light.nola_bedroom
+    type: custom:multiple-entity-row
+    show_state: false
+    name: Nola's Bedroom
+    entities:
+      - entity: media_player.nola
+        icon: true
+        name: google
+      - entity: light.nola_bedroom
+        icon: true
+        name: light
+        tap_action: 
+          action: toggle
+      - entity: fan.nola_bedroom
+        name: fan
+        icon: true
+        state_color: true
+      - entity: sensor.nola_bedroom_temperature
+        name: temp
+        tap_action: 
+          action: navigate
+          navigation_path: climate
+
+  - entity: light.parker_bedroom
+    type: custom:multiple-entity-row
+    show_state: false
+    name: Parker's Bedroom
+    entities:
+      - entity: media_player.parker
+        icon: true
+        name: google
+      - entity: light.parker_bedroom
+        icon: true
+        name: light
+        tap_action: 
+          action: toggle
+      - entity: fan.parker_bedroom
+        name: fan
+        icon: true
+        state_color: true
+      - entity: sensor.parker_bedroom_temperature
+        name: temp
+        tap_action: 
+          action: navigate
+          navigation_path: climate
+
+  # basement
+  - type: section
   - entity: light.home_theater
     type: custom:multiple-entity-row
     show_state: false
@@ -68,27 +140,7 @@ entities:
         name: temp
         tap_action: 
           action: navigate
-          navigation_path: temperature
-  - entity: light.nola_bedroom
-    type: custom:multiple-entity-row
-    show_state: false
-    name: Nola's Bedroom
-    entities:
-      - entity: media_player.nola
-        icon: true
-        name: google
-      - entity: light.nola_bedroom
-        icon: true
-        name: light
-      - entity: fan.nola_bedroom
-        name: fan
-        icon: true
-        state_color: true
-      - entity: sensor.nola_bedroom_temperature
-        name: temp
-        tap_action: 
-          action: navigate
-          navigation_path: temperature
+          navigation_path: climate
   - entity: light.server_room
     type: custom:multiple-entity-row
     show_state: false
@@ -106,27 +158,7 @@ entities:
         name: temp
         tap_action: 
           action: navigate
-          navigation_path: temperature
-  - entity: light.office_lights
-    type: custom:multiple-entity-row
-    show_state: false
-    name: Office
-    entities:
-      - entity: binary_sensor.office_window
-        state_color: true
-        icon: true
-        name: window
-      - entity: light. light.office_can
-        icon: true
-        name: can
-      - entity: light.office_center
-        icon: true
-        name: center
-      - entity: sensor.weather_station_inside_temp
-        name: temp  
-        tap_action: 
-          action: navigate
-          navigation_path: temperature
+          navigation_path: climate
   - entity: light.maker_space
     type: custom:multiple-entity-row
     show_state: false
@@ -139,6 +171,30 @@ entities:
         icon: true
         name: light
       - entity: sensor.maker_space_temperature
+        name: temp
+        tap_action: 
+          action: navigate
+          navigation_path: temperature
+          
+  # outside
+  - type: section
+  - entity: light.garage
+    type: custom:multiple-entity-row
+    show_state: false
+    name: Garage
+    tap_action:
+      action: navigate
+      navigation_path: garage
+    entities:
+      - entity: cover.garage_door
+        icon: true
+        name: door
+        state_color: true
+      - entity: light.garage
+        icon: true
+        name: light
+        state_color: true
+      - entity: sensor.exterior_temperature
         name: temp
         tap_action: 
           action: navigate

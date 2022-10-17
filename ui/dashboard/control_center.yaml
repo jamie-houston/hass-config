@@ -5,16 +5,53 @@ views:
     badges: []
     cards:
       - !include ../card/weather.yaml
+      - !include ../card/quick_nav.yaml
       - !include ../card/areas.yaml
-      - !include ../card/all_lights.yaml
-      - !include ../card/todo.yaml
-  - title: Temperature
+  - title: Climate
     subview: true
-    path: temperature
+    path: climate
     cards:
-      - !include ../card/temperature.yaml
+      - type: custom:clock-weather-card
+        entity: weather.home
+      - !include ../card/climate/area_temperature.yaml
+      - !include ../card/climate/temperature_graph.yaml
   - title: Server Room
     subview: true
     path: server_room
     cards:
       - !include ../card/areas.yaml
+  - title: Lights
+    subview: true
+    path: lights
+    cards:
+      - !include ../card/all_lights.yaml
+  - title: Tasks
+    subview: true
+    path: tasks
+    cards:
+      - !include ../card/todo.yaml
+      - !include ../card/xc90_charging.yaml
+  - title: Garage
+    subview: true
+    path: garage
+    cards:
+      - !include ../card/xc90_charging.yaml
+      - !include ../card/xc90.yaml
+  - title: Energy
+    subview: true
+    path: energy
+    cards:
+      - !include ../card/energy/total_power.yaml
+      - !include ../card/energy/current_energy_graph.yaml
+      - !include ../card/energy/daily_energy_graph.yaml
+  - title: Server Room
+    subview: true
+    path: server_room
+    cards:
+      - !include ../card/device/litter_robot.yaml
+  - title: Network
+    subview: true
+    path: network
+    cards:
+      - !include ../card/network/current_speed.yaml
+      - !include ../card/network/history_speed.yaml

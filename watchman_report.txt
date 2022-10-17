@@ -2,91 +2,107 @@
 
 -== Congratulations, all 7 services from your config are available!
 
--== Missing 49 entity(ies) from 116 found in your config:
+-== Missing 48 entity(ies) from 180 found in your config:
 +--------------------------------+---------+--------------------------------------------------------------+
 | Entity ID                      | State   | Location                                                     |
 +--------------------------------+---------+--------------------------------------------------------------+
-| sensor.ipv4_address_eth0       | missing | dwains-dashboard/configs/more_pages/system_and_update_info_p |
-|                                |         | age_blueprint/page.yaml:55                                   |
-| sensor.last_boot               | missing | dwains-dashboard/configs/more_pages/system_and_update_info_p |
-|                                |         | age_blueprint/page.yaml:58                                   |
-| sensor.memory_use_percent      | missing | dwains-dashboard/configs/more_pages/system_and_update_info_p |
-|                                |         | age_blueprint/page.yaml:69                                   |
-| sensor.disk_use_percent        | missing | dwains-dashboard/configs/more_pages/system_and_update_info_p |
-|                                |         | age_blueprint/page.yaml:72                                   |
-| sensor.network_throughput_in_e | missing | dwains-dashboard/configs/more_pages/system_and_update_info_p |
-| th0                            |         | age_blueprint/page.yaml:92                                   |
-| sensor.network_throughput_out_ | missing | dwains-dashboard/configs/more_pages/system_and_update_info_p |
-| eth0                           |         | age_blueprint/page.yaml:106                                  |
-| light.foyer ('Foyer Light')    | unavail | group/lights.yaml:5                                          |
-| light.front_porch              | missing | group/lights.yaml:6                                          |
+| light.kitchen_can ('Kitchen    | unavail | light_groups.yaml:79                                         |
+| Can Light')                    |         |                                                              |
+| light.foyer                    | missing | light_groups.yaml:99                                         |
+| group.ignored_unavailable_enti | missing | packages/unavailable_entities.yaml:22                        |
+| ties                           |         |                                                              |
+| sensor.weather_station_inside_ | missing | dwains-                                                      |
+| temp                           |         | dashboard/configs/cards/devices/weather/entities.yaml:7      |
+| sensor.ipv4_address_eth0       | missing | dwains-dashboard/blueprints/system_and_update_info_page_blue |
+|                                |         | print.yaml:115                                               |
+| sensor.last_boot               | missing | dwains-dashboard/blueprints/system_and_update_info_page_blue |
+|                                |         | print.yaml:118                                               |
+| sensor.memory_use_percent      | missing | dwains-dashboard/blueprints/system_and_update_info_page_blue |
+|                                |         | print.yaml:128                                               |
+| sensor.disk_use_percent        | missing | dwains-dashboard/blueprints/system_and_update_info_page_blue |
+|                                |         | print.yaml:131                                               |
+| sensor.network_throughput_in_e | missing | dwains-dashboard/blueprints/system_and_update_info_page_blue |
+| th0                            |         | print.yaml:152                                               |
+| sensor.network_throughput_out_ | missing | dwains-dashboard/blueprints/system_and_update_info_page_blue |
+| eth0                           |         | print.yaml:166                                               |
+| sensor.kitchen_window_temperat | missing | ui/dashboard/landing.yaml:23                                 |
+| ure                            |         |                                                              |
+| media_player.nola ('Nola's     | unavail | ui/card/areas.yaml:77                                        |
+| Bedroom Google Mini')          |         |                                                              |
+| media_player.silas             | missing | ui/card/areas.yaml:137                                       |
+| sensor.volvo_xc90_battery_leve | unavail | ui/card/xc90_charging.yaml:4,12                              |
+| l ('Volvo XC90 Battery level') |         |                                                              |
+| binary_sensor.volvo_xc90_batte | unavail | ui/card/xc90_charging.yaml:6,10,19                           |
+| ry_charging ('Volvo XC90       |         |                                                              |
+| Battery Charging')             |         |                                                              |
+| sensor.volvo_xc90_time_to_full | unavail | ui/card/xc90_charging.yaml:23                                |
+| y_charged ('Volvo XC90 Time to |         |                                                              |
+| fully charged')                |         |                                                              |
+| sensor.volvo_xc90_range        | unavail | ui/card/xc90.yaml:17                                         |
+| ('Volvo XC90 Range')           |         |                                                              |
+| sensor.volvo_xc90_fuel_amount  | unavail | ui/card/xc90.yaml:25                                         |
+| ('Volvo XC90 Fuel amount')     |         |                                                              |
+| binary_sensor.volvo_xc90_doors | unavail | ui/card/xc90.yaml:41                                         |
+| ('Volvo XC90 Doors')           |         |                                                              |
+| binary_sensor.volvo_xc90_windo | unavail | ui/card/xc90.yaml:49                                         |
+| ws ('Volvo XC90 Windows')      |         |                                                              |
+| lock.volvo_xc90_door_lock      | unavail | ui/card/xc90.yaml:57                                         |
+| ('Volvo XC90 Door lock')       |         |                                                              |
+| switch.volvo_xc90_heater       | unavail | ui/card/xc90.yaml:62                                         |
+| ('Volvo XC90 Heater')          |         |                                                              |
+| binary_sensor.volvo_xc90_engin | unavail | ui/card/xc90.yaml:67                                         |
+| e ('Volvo XC90 Engine')        |         |                                                              |
+| sensor.volvo_xc90_odometer     | unavail | ui/card/xc90.yaml:80                                         |
+| ('Volvo XC90 Odometer')        |         |                                                              |
+| sensor.exerior_temperature     | missing | ui/card/climate/area_temperature.yaml:26                     |
+| button.litter_robot_reset_wast | unknown | ui/card/device/litter_robot.yaml:5                           |
+| e_drawer ('Litter Robot Reset  |         |                                                              |
+| waste drawer')                 |         |                                                              |
 | climate.hvac                   | missing | custom_components/ui_lovelace_minimalist/lovelace/ulm_templa |
 |                                |         | tes/popup_templates/popup_buttons/popup_button_airconditionn |
 |                                |         | er.yaml:22                                                   |
 | number.match                   | missing | custom_components/ui_lovelace_minimalist/lovelace/translatio |
 |                                |         | ns/default.yaml:17,27                                        |
-| binary_sensor.back_porch_slidi | missing | .storage/lovelace.mobile_dashboard:67                        |
+| sensor.weather_station_temp    | missing | .storage/lovelace.mobile_dashboard:36,342                    |
+| binary_sensor.back_porch_slidi | missing | .storage/lovelace.mobile_dashboard:47                        |
 | ng_door_access_control_window_ |         |                                                              |
 | door_is_open                   |         |                                                              |
-| binary_sensor.door_window_temp | missing | .storage/lovelace.mobile_dashboard:74                        |
+| binary_sensor.door_window_temp | missing | .storage/lovelace.mobile_dashboard:54                        |
 | erature_humidity_sensor_access |         |                                                              |
 | _control_window_door_is_open   |         |                                                              |
-| binary_sensor.door_window_temp | missing | .storage/lovelace.mobile_dashboard:81                        |
+| binary_sensor.door_window_temp | missing | .storage/lovelace.mobile_dashboard:61                        |
 | erature_humidity_sensor_access |         |                                                              |
 | _control_window_door_is_open_2 |         |                                                              |
-| sensor.entryway_temperature    | missing | .storage/lovelace.mobile_dashboard:106,235,298               |
-| sensor.fuhrmann_house_temp     | missing | .storage/lovelace.mobile_dashboard:112,300,747               |
-| light.home_theater_light       | missing | .storage/lovelace.mobile_dashboard:165,219,358               |
-| switch.front_porch_sconces     | missing | .storage/lovelace.mobile_dashboard:184                       |
-| light.silas_bedroom_light      | missing | .storage/lovelace.mobile_dashboard:196                       |
-| light.z_wave_plus_700_series_d | missing | .storage/lovelace.mobile_dashboard:237                       |
-| immer_switch                   |         |                                                              |
-| sensor.fuhrmann_house_inside_t | missing | .storage/lovelace.mobile_dashboard:299                       |
-| emp                            |         |                                                              |
-| sensor.none_balance_1min       | missing | .storage/lovelace.mobile_dashboard:307                       |
-| binary_sensor.nest_protect_bas | missing | .storage/lovelace.mobile_dashboard:323                       |
+| sensor.entryway_temperature    | missing | .storage/lovelace.mobile_dashboard:86                        |
+| sensor.fuhrmann_house_temp     | missing | .storage/lovelace.mobile_dashboard:92                        |
+| light.home_theater_light       | missing | .storage/lovelace.mobile_dashboard:145                       |
+| switch.front_porch_sconces     | missing | .storage/lovelace.mobile_dashboard:164                       |
+| light.silas_bedroom_light      | missing | .storage/lovelace.mobile_dashboard:176                       |
+| remote.family_room_apple_tv    | unavail | .storage/lovelace.mobile_dashboard:270                       |
+| ('Family Room Apple TV')       |         |                                                              |
+| binary_sensor.nest_protect_bas | missing | .storage/lovelace.mobile_dashboard:387                       |
 | ement_occupancy                |         |                                                              |
-| media_player.home_theater_appl | missing | .storage/lovelace.mobile_dashboard:365                       |
-| etv                            |         |                                                              |
-| sensor.fuhrmann_house_feels_li | missing | .storage/lovelace.mobile_dashboard:423                       |
+| sensor.nest_temperature_sensor | missing | .storage/lovelace.mobile_dashboard:484                       |
+| _silas_s_bedroom_temperature   |         |                                                              |
+| sensor.fuhrmann_house_feels_li | missing | .storage/lovelace.mobile_dashboard:487                       |
 | ke                             |         |                                                              |
-| fan.silass_bedroom_fan         | missing | .storage/lovelace.mobile_dashboard:440                       |
-| sensor.fuhrmann_house_wind_spe | missing | .storage/lovelace.mobile_dashboard:450                       |
-| ed                             |         |                                                              |
-| sensor.fuhrmann_house_weekly_r | missing | .storage/lovelace.mobile_dashboard:465                       |
+| sensor.fuhrmann_house_weekly_r | missing | .storage/lovelace.mobile_dashboard:529                       |
 | ain                            |         |                                                              |
-| light.basement_lights          | missing | .storage/lovelace.mobile_dashboard:491,493,523,526,537,870   |
-| light.main_floor_lights        | missing | .storage/lovelace.mobile_dashboard:501,506,545,548,559       |
-| light.upstairs_lights          | missing | .storage/lovelace.mobile_dashboard:510,567,570,581           |
-| lock.touchscreen_deadbolt      | missing | .storage/lovelace.mobile_dashboard:787                       |
+| light.upstairs_lights          | missing | .storage/lovelace.mobile_dashboard:574,631,634,645           |
 | sensor.server_room_4in1_sensor | missing | .storage/lovelace.lovelace_playground:25                     |
 | _air_temperature               |         |                                                              |
-| sensor.back_sliding_door_batte | missing | .storage/lovelace.lovelace_playground:33                     |
-| ry_level                       |         |                                                              |
-| sensor.upstairs_hallway_thermo | missing | .storage/lovelace.lovelace_playground:59                     |
-| stat_temperature               |         |                                                              |
-| light.basement_play_room_light | missing | .storage/lovelace.lovelace_playground:91                     |
-| light.basement_bathroom_light  | missing | .storage/lovelace.lovelace_playground:102                    |
-| light.maker_space_light        | missing | .storage/lovelace.lovelace_playground:113                    |
-| light.server_room_light        | missing | .storage/lovelace.lovelace_playground:124                    |
-| light.basement_bedroom_light   | missing | .storage/lovelace.lovelace_playground:135                    |
-| binary_sensor.nest_protect_hom | missing | .storage/lovelace.home_dashboard:119,122                     |
-| e_theater_occupancy            |         |                                                              |
-| light.master_bedroom_closet_li | missing | .storage/lovelace.home_dashboard:150                         |
-| ght                            |         |                                                              |
-| light.master_bedroom_cans      | missing | .storage/lovelace.home_dashboard:155                         |
-| light.master_bedroom_fan_light | missing | .storage/lovelace.home_dashboard:161                         |
-| fan.master_bedroom_fan         | missing | .storage/lovelace.home_dashboard:166                         |
-| light.master_bathroom_lights   | missing | .storage/lovelace.home_dashboard:185                         |
-| light.master_bathroom_closet_l | missing | .storage/lovelace.home_dashboard:190                         |
-| ight                           |         |                                                              |
-| light.master_bathroom_shower_l | missing | .storage/lovelace.home_dashboard:195                         |
-| ight_2                         |         |                                                              |
-| fan.master_bathroom_toilet_fan | missing | .storage/lovelace.home_dashboard:205                         |
-| light.master_bathroom_toilet_l | missing | .storage/lovelace.home_dashboard:210                         |
-| ight                           |         |                                                              |
+| sensor.server_room_multi_senso | missing | .storage/lovelace.lovelace_playground:163                    |
+| r_air_temperature              |         |                                                              |
+| device_tracker.silas_s21_phone | unknown | .storage/lovelace.lovelace_playground:215                    |
+| ('Silas S21 Phone')            |         |                                                              |
+| sensor.litter_robot_sleep_mode | unknown | .storage/lovelace.lovelace_playground:243                    |
+| _start_time ('Litter Robot     |         |                                                              |
+| Sleep mode start time')        |         |                                                              |
+| sensor.litter_robot_sleep_mode | unknown | .storage/lovelace.lovelace_playground:249                    |
+| _end_time ('Litter Robot Sleep |         |                                                              |
+| mode end time')                |         |                                                              |
 +--------------------------------+---------+--------------------------------------------------------------+
 
--== Report created on 06 Oct 2022 15:28:50
--== Parsed 220 files in 5.31s., ignored 0 files 
--== Generated in: 0.03s. Validated in: 0.00s.
+-== Report created on 17 Oct 2022 17:18:32
+-== Parsed 239 files in 3.28s., ignored 0 files 
+-== Generated in: 0.11s. Validated in: 0.00s.

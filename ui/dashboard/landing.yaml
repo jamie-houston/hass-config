@@ -17,8 +17,8 @@ views:
         days_to_show: 1
         type: statistics-graph
         entities:
-          - sensor.weather_station_inside_temp
-          - sensor.weather_station_temp
+          - sensor.office_temperature
+          - sensor.exterior_temperature
           - sensor.entryway_nest_thermostat_temperature
           - sensor.kitchen_window_temperature
           - sensor.master_bedroom_temperature

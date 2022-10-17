@@ -1,0 +1,46 @@
+type: horizontal-stack
+cards:
+  - type: custom:mushroom-template-card
+    primary: |
+      {{ states.light|selectattr('state','equalto','on')|list|length }}
+      /
+      {{ states.light|selectattr('state','equalto','off')|list|length }}
+    icon: mdi:lightbulb
+    layout: vertical
+    tap_action:
+      action: navigate
+      navigation_path: lights
+    icon_color: >
+      {% if (states.light|selectattr('state','equalto','on')|list|length  > 0) %} 
+        yellow
+      {% else %} 
+        green
+      {% endif %}
+  - type: custom:mushroom-template-card
+    primary: Tasks
+    icon: mdi:check-all
+    layout: vertical
+    tap_action:
+      action: navigate
+      navigation_path: tasks
+  - type: custom:mushroom-template-card
+    primary: Temperature
+    icon: mdi:thermometer
+    layout: vertical
+    tap_action:
+      action: navigate
+      navigation_path: climate
+  - type: custom:mushroom-template-card
+    primary: Energy
+    icon: mdi:power-plug-outline    
+    layout: vertical
+    tap_action:
+      action: navigate
+      navigation_path: energy
+  - type: custom:mushroom-template-card
+    primary: Network
+    icon: mdi:network    
+    layout: vertical
+    tap_action:
+      action: navigate
+      navigation_path: network

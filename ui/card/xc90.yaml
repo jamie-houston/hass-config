@@ -1,0 +1,87 @@
+type: picture-elements
+elements:
+  - type: state-icon
+    entity: binary_sensor.volvo_xc90_battery_charging
+    icon: mdi:battery-charging
+    style:
+      top: 1%
+      left: 1%
+      transform: none
+  - type: state-label
+    entity: sensor.volvo_xc90_time_to_fully_charged
+    style:
+      color: black
+      top: 5%
+      left: 20%
+  - type: state-label
+    entity: sensor.volvo_xc90_range
+    prefix: 'Range: '
+    style:
+      color: black
+      top: 15%
+      left: 5px
+      transform: none
+  - type: state-label
+    entity: sensor.volvo_xc90_fuel_amount
+    prefix: 'Fuel: '
+    style:
+      color: black
+      top: 25%
+      left: 5px
+      transform: none
+  - type: state-label
+    entity: sensor.volvo_xc90_battery_level
+    prefix: 'Battery: '
+    style:
+      color: black
+      top: 20%
+      left: 5px
+      transform: none
+  - type: state-label
+    entity: binary_sensor.volvo_xc90_doors
+    prefix: 'Doors: '
+    style:
+      color: black
+      top: 15%
+      right: 5px
+      transform: none
+  - type: state-label
+    entity: binary_sensor.volvo_xc90_windows
+    prefix: 'Windows: '
+    style:
+      color: black
+      top: 20%
+      right: 5px
+      transform: none
+  - type: state-icon
+    entity: lock.volvo_xc90_door_lock
+    style:
+      top: 10%
+      right: 8%
+  - type: state-icon
+    entity: switch.volvo_xc90_heater
+    style:
+      top: 10%
+      right: 16%
+  - type: state-icon
+    entity: binary_sensor.volvo_xc90_engine
+    style:
+      top: 10%
+      right: 24%
+  - type: state-label
+    entity: sensor.exterior_temperature
+    prefix: 'Temperature: '
+    style:
+      bottom: 5%
+      left: 5%
+      color: black
+      transform: none
+  - type: state-label
+    entity: sensor.volvo_xc90_odometer
+    prefix: 'Odometer: '
+    style:
+      color: black
+      bottom: 5%
+      right: 5px
+      transform: none
+image: local/images/backgrounds/volvo_xc90.jpg

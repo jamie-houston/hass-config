@@ -1,0 +1,10 @@
+chart_type: line
+period: hour
+days_to_show: 1
+type: statistics-graph
+entities:
+  - sensor.entryway_nest_thermostat_temperature
+  - sensor.top_floor_hallway_nest_thermostat_temperature
+  - sensor.exterior_temperature
+stat_types:
+  - mean

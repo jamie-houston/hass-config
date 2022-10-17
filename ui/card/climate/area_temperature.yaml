@@ -1,0 +1,30 @@
+type: vertical-stack
+cards:
+  - type: horizontal-stack
+    cards:
+      - type: thermostat
+        entity: climate.entryway_nest_thermostat
+      - type: thermostat
+        entity: climate.top_floor_hallway_nest_thermostat
+  - type: custom:auto-entities
+    card:
+      type: entities
+    entities:
+      - sensor.exterior_temperature
+      - sensor.office_temperature
+    filter:
+      include:
+        - domain: sensor
+          entity_id: '*_temperature'
+          options:
+            entity: this.entity_id
+            type: custom:template-entity-row
+            name: '{{ area_name(config.entity) }}'
+            state: ' {{ states(config.entity)}}'
+            icon: >-
+              mdi:thermometer-chevron-{% if (states(config.entity) | float(0) >
+              states('sensor.exerior_temperature') | float(0)) %}up
+              {%else%}down{%endif%}
+            condition: >-
+              {{ (area_name(config.entity) != None and
+              is_number(states(config.entity))) }}

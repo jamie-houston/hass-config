@@ -1,0 +1,4 @@
+type: history-graph
+entities:
+  - entity: sensor.none_123_1d
+hours_to_show: 72

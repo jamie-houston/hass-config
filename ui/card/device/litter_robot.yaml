@@ -1,0 +1,6 @@
+type: entities
+entities:
+  - entity: select.litter_robot_clean_cycle_wait_time_minutes
+  - entity: vacuum.litter_robot_litter_box
+  - entity: button.litter_robot_reset_waste_drawer
+  - entity: sensor.litter_robot_status_code

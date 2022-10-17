@@ -1,0 +1,5 @@
+type: gauge
+entity: sensor.speedtest_download
+needle: true
+max: 1000
+min: 1
