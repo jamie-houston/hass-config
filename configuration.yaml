@@ -18,6 +18,18 @@ script: !include scripts.yaml
 scene: !include scenes.yaml
 light: !include light_groups.yaml
 
+influxdb:
+  host: 10.0.1.10
+  port: 8086
+  database: homeassistant
+  username: homeassistant
+  password: !secret influx_password
+  max_retries: 3
+  default_measurement: state
+
+# enable python scripts (in python_scripts folder)
+python_script:
+
 nest:
   client_id: !secret nest_client_id
   client_secret: !secret nest_client_secret

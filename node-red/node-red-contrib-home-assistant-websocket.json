@@ -1,1 +1,10 @@
-{}
+{
+  "nodes": {
+    "3ac55a4dc450874b": {
+      "isEnabled": true
+    },
+    "0800a93d85046c91": {
+      "isEnabled": true
+    }
+  }
+}
