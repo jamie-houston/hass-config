@@ -29,7 +29,7 @@
       domain: light
   mode: single
 - id: "1664759246970"
-  alias: "Home theater light with TV off "
+  alias: "Home theater light with TV off"
   trigger:
     - type: occupied
       platform: device
@@ -41,7 +41,7 @@
       device_id: 1d52216c126d3b76c4854515564d14d0
       domain: media_player
       entity_id: media_player.home_theater_apple_tv
-      type: is_off
+      type: standby
   action:
     - type: turn_on
       device_id: 2460edda7fbbeb7d702ba74eef896b34

@@ -16,6 +16,9 @@
   name: Holiday Lights
   entities:
     - light.front_porch_plug_black
+    - light.house_holiday_lights
+    - light.front_porch_plug_white
+    - light.wled_house
 
 - platform: group
   name: Night Lights

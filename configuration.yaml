@@ -5,6 +5,7 @@ homeassistant:
   packages: !include_dir_named packages
   unit_system: imperial
   time_zone: America/Chicago
+  country: US
 
 recorder:
   db_url: mysql://homeassistant:hayo31@core-mariadb/homeassistant?charset=utf8mb4
@@ -12,7 +13,6 @@ recorder:
 tts:
   - platform: google_translate
 
-group: !include groups.yaml
 automation: !include_dir_merge_list automation
 script: !include scripts.yaml
 scene: !include scenes.yaml
@@ -25,7 +25,14 @@ influxdb:
   username: homeassistant
   password: !secret influx_password
   max_retries: 3
-  default_measurement: state
+  default_measurement: units
+  bucket: homeassistant
+  precision: ms
+  tags_attributes:
+    - entity_id
+    - friendly_name
+    - device_class
+
 
 # enable python scripts (in python_scripts folder)
 python_script:

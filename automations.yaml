@@ -14,3 +14,24 @@
     entity_id: light.top_floor_hallway
     domain: light
   mode: single
+- id: '1671723988189'
+  alias: Front Door Scene
+  description: Toggle holiday lights
+  use_blueprint:
+    path: fxlt/zen32-scene-controller-z-wave-js.yaml
+    input:
+      zooz_switch: 0ca9601b44374b3932e2e4d9f5627689
+      scene_1:
+      - service: light.turn_on
+        data:
+          rgb_color:
+          - 85
+          - 153
+          - 56
+        target:
+          entity_id: light.holiday_lights
+      scene_2:
+      - service: light.turn_off
+        data: {}
+        target:
+          entity_id: light.holiday_lights

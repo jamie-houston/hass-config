@@ -1,0 +1,9 @@
+- alias: Office motion light
+  description: 'Turn office light on when I come in at night'
+  use_blueprint:
+    path: homeassistant/motion_light.yaml
+    input:
+      motion_entity: binary_sensor.office_motion
+      light_target:
+        entity_id: light.office_can
+      no_motion_wait: 180
