@@ -1,0 +1,22 @@
+type: custom:auto-entities
+card:
+  type: entities
+entities:
+  - sensor.exterior_temperature
+  - sensor.office_temperature
+filter:
+  include:
+    - domain: sensor
+      entity_id: '*_temperature'
+      options:
+        entity: this.entity_id
+        type: custom:template-entity-row
+        name: '{{ area_name(config.entity) }}'
+        state: ' {{ states(config.entity)}}'
+        secondary: >-
+          {% if (states(config.entity) | float(0) >
+          states('sensor.weather_station_temp') | float(0)) %}hotter
+          {%else%}cooler{%endif%}
+        condition: >-
+          {{ (area_name(config.entity) != None and
+          is_number(states(config.entity))) }}

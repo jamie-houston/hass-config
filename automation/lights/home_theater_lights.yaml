@@ -13,7 +13,7 @@
       entity_id: light.home_theater
       domain: light
   mode: single
-- id: "1655393092824"
+- id: hometheaterlighton
   alias: Home Theater Light on when turning off TV
   trigger:
     - platform: device
@@ -23,11 +23,11 @@
       type: turned_off
   condition: []
   action:
-    - type: turn_on
-      device_id: 2460edda7fbbeb7d702ba74eef896b34
-      entity_id: light.home_theater
-      domain: light
-  mode: single
+    - service: light.turn_on
+      target:
+        entity_id: light.home_theater
+      data:
+        brightness: 100
 - id: "1664759246970"
   alias: "Home theater light with TV off"
   trigger:
@@ -41,7 +41,7 @@
       device_id: 1d52216c126d3b76c4854515564d14d0
       domain: media_player
       entity_id: media_player.home_theater_apple_tv
-      type: standby
+      type: off
   action:
     - type: turn_on
       device_id: 2460edda7fbbeb7d702ba74eef896b34

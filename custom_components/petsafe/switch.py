@@ -1,16 +1,22 @@
-from . import PetSafeCoordinator
+from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
+from homeassistant.exceptions import ConfigEntryNotReady
 from homeassistant.helpers.entity import EntityCategory
-import petsafe
+
+from . import PetSafeCoordinator, SwitchEntities
 from .const import DOMAIN
-from . import SwitchEntities
 
 
-async def async_setup_entry(hass: HomeAssistant, config, add_entities):
+async def async_setup_entry(hass: HomeAssistant, config: ConfigEntry, add_entities):
     coordinator: PetSafeCoordinator = hass.data[DOMAIN][config.entry_id]
-    api: petsafe.PetSafeClient = coordinator.api
 
-    feeders = await hass.async_add_executor_job(petsafe.devices.get_feeders, api)
+    feeders = None
+    try:
+        feeders = await coordinator.get_feeders()
+    except Exception as ex:
+        raise ConfigEntryNotReady(
+            "Failed to retrieve PetSafe SmartFeed devices"
+        ) from ex
 
     entities = []
     for feeder in feeders:
@@ -31,6 +37,17 @@ async def async_setup_entry(hass: HomeAssistant, config, add_entities):
                 name="Child Lock",
                 device_type="child_lock",
                 icon="mdi:lock-open",
+                device=feeder,
+                coordinator=coordinator,
+                entity_category=EntityCategory.CONFIG,
+            )
+        )
+        entities.append(
+            SwitchEntities.PetSafeFeederSwitchEntity(
+                hass=hass,
+                name="Slow Feed",
+                device_type="slow_feed",
+                icon="mdi:tortoise",
                 device=feeder,
                 coordinator=coordinator,
                 entity_category=EntityCategory.CONFIG,

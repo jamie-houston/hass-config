@@ -1,0 +1,16 @@
+alias: Front Doorbell on Home Theater TV
+description: ""
+trigger:
+  - platform: device
+    device_id: 036f3bc6ff5056842e0ec901e5b350ee
+    domain: nest
+    type: doorbell_chime
+condition: []
+action:
+  - service: camera.play_stream
+    data:
+      media_player: media_player.home_theater_chromecast
+      format: hls
+    target:
+      entity_id: camera.front_door
+mode: single

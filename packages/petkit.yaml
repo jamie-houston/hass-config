@@ -1,0 +1,7 @@
+petkit:
+  # Single account
+  username: 1-2068522852 # Username of Petkit APP (小佩宠物), important to use country code
+  password: .fdhs9QjGJmB # MD5 or Raw password
+  api_base: http://api.petkt.com/latest/  
+  scan_interval:  00:02:00
+  feeding_amount: 25

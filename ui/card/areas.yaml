@@ -45,34 +45,34 @@ entities:
 
   # top floor
   - type: section
-  - entity: light.master_bedroom_lights
+  - entity: light.primary_bedroom_lights
     type: custom:multiple-entity-row
-    name: Master Bedroom
+    name: Primary Bedroom
     show_state: false
     entities:
-      - entity: binary_sensor.master_bedroom_window
+      - entity: binary_sensor.primary_bedroom_window
         name: Window
         state_color: true
         icon: true
-      - entity: fan.master_bedroom
+      - entity: fan.primary_bedroom
         name: fan
         icon: true
         toggle: true
         state_color: true
-      - entity: sensor.master_bedroom_temperature
+      - entity: sensor.primary_bedroom_temperature
         name: temp
         tap_action: 
           action: navigate
           navigation_path: climate
-  - entity: light.master_bathroom_lights
+  - entity: light.primary_bathroom_lights
     type: custom:multiple-entity-row
     show_state: false
-    name: Master Bathroom
+    name: Primary Bathroom
     entities:
-      - entity: fan.master_bathroom_shower
+      - entity: fan.primary_bathroom_shower
         icon: true
         name: shower
-      - entity: light.master_bathroom_shower
+      - entity: light.primary_bathroom_shower
         icon: true
         name: shower
   - entity: light.nola_bedroom
@@ -146,6 +146,14 @@ entities:
 
   # basement
   - type: section
+  - type: attribute
+    name: Basement
+    entity: sensor.server_room_temperature
+    attribute: name
+    tap_action: 
+      action: navigate
+      navigation_path: basement
+
   - entity: light.home_theater
     type: custom:multiple-entity-row
     show_state: false

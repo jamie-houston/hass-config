@@ -1,0 +1,51 @@
+type: picture-elements
+elements:
+  - type: state-icon
+    entity: light.home_theater
+    tap_action:
+      action: toggle
+    style:
+      top: 25%
+      right: 10%
+      width: 25%
+  - type: state-icon
+    entity: light.basement_play_room
+    tap_action:
+      action: toggle
+    style:
+      bottom: 40%
+      left: 45%
+  - type: state-icon
+    entity: light.basement_bathroom
+    tap_action:
+      action: toggle
+    style:
+      bottom: 35%
+      right: 20%
+  - type: state-icon
+    entity: light.maker_space
+    tap_action:
+      action: toggle
+    style:
+      bottom: 48%
+      right: 25%
+  - type: state-icon
+    entity: light.server_room
+    tap_action:
+      action: toggle
+    style:
+      bottom: 20%
+      right: 15%
+  - type: state-icon
+    entity: light.basement_bedroom
+    tap_action:
+      action: toggle
+    style:
+      bottom: 12%
+      left: 50%
+  - type: state-label
+    entity: sensor.server_room_temperature
+    style:
+      bottom: 40%
+      right: 30%
+image: /local/images/floorplan/basement_3d.jpg

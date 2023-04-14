@@ -1,0 +1,63 @@
+api_version: 1
+host: 10.0.1.10
+port: 8086
+database: homeassistant
+username: homeassistant
+password: !secret influx_password
+max_retries: 3
+default_measurement: state
+exclude:
+  domains:
+    - zwave
+    - automation
+#   entities:
+#     - sensor.date
+#     - sensor.date_time
+#     - sensor.time
+include:
+  domains:
+    - sensor
+    - binary_sensor
+# from(bucket: "homeassistant/autogen")
+# |> range(start: v.timeRangeStart)
+# |> filter(fn: (r) => r.domain == "sensor")
+# |> filter(fn: (r) => r["_measurement"] == "state")
+# |> filter(fn: (r) => r.entity_id == "s22u_last_used_app")
+# |> filter(fn: (r) => r["_field"] == "Label_str")
+# |> group(columns: ["_value"])
+# |> count(column: "_field")
+# |> yield(name: "count") // return the results as a chart
+
+# SELECT "entity_id", "state" FROM "homeassistant"."autogen"."state" WHERE time > :dashboardTime: AND time < :upperDashboardTime: AND "domain"='binary_sensor' and "entity_id" =~ /interactive*/
+# 2.0
+# host: 10.0.1.10
+# port: 8086
+# ssl: false
+# api_version: 2
+# token: 1qaz@WSX
+# verify_ssl: false
+# bucket: homeassistant
+# organization: influxdata
+# component_config_domain:
+#   sensor:
+#     ignore_attributes:
+#       - attribution
+#       - device_class
+#       - state_class
+#       - last_reset
+#       - integration
+#       - description
+#       - unit_of_measurement
+#       - friendly_name
+#       - type
+# include:
+#   domains:
+#     - sensor
+# precision: ms
+# tags_attributes:
+#   - entity_id
+#   - friendly_name
+#   - device_class
+
+
+# SELECT "entity_id", "state" FROM "homeassistant"."autogen"."state" WHERE time > :dashboardTime: AND time < :upperDashboardTime: AND "domain"='binary_sensor' and "entity_id" =~ /interactive*/

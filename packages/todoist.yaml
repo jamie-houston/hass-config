@@ -7,8 +7,9 @@ sensor:
     method: GET
     resource: "https://api.todoist.com/sync/v9/projects/get_data"
     params:
-      token: !secret todoist_api_token
       project_id: 2296895971
+    headers:
+        Authorization: !secret todoist_api_token
     value_template: "{{ value_json['project']['id'] }}"
     json_attributes:
       - project
@@ -19,5 +20,7 @@ rest_command:
   todoist:
     method: post
     url: "https://api.todoist.com/sync/v9/{{ url }}"
-    payload: !secret todoist_api_payload
+    payload: '{{ payload }}'
+    headers:
+      Authorization: !secret todoist_api_token
     content_type: "application/x-www-form-urlencoded"

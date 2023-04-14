@@ -1,6 +1,6 @@
 type: history-graph
 entities:
-  - entity: sensor.none_123_1min
+  - entity: sensor.total_power_usage_1min
 title: Power usage
 hours_to_show: 1
 refresh_interval: 5

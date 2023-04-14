@@ -1,0 +1,26 @@
+type: custom:auto-entities
+card:
+  type: entities
+  title: Low Batteries
+  card_mod:
+    style: |
+      ha-card {
+        background-color: rgba(204,132,0,1);
+        border-radius: 5px;
+        --primary-color: black;
+        --paper-item-icon-color: red;
+        --secondary-text-color: red;
+      }
+filter:
+  include:
+    - domain: sensor
+      attributes:
+        device_class: battery
+      options:
+        secondary_info: state
+      state 1: "< 40"
+      state 2: "> 0"
+else:
+  type: markdown
+  content: >-
+    No Low Batteries

@@ -1,23 +1,27 @@
-from homeassistant.helpers.update_coordinator import CoordinatorEntity
-from homeassistant.components.switch import SwitchEntity
-from homeassistant.helpers.entity import DeviceInfo
-import petsafe
-from .const import DOMAIN, MANUFACTURER
-from . import PetSafeData
 from typing import Any
+
+from homeassistant.components.switch import SwitchEntity
+from homeassistant.core import HomeAssistant
+from homeassistant.helpers.entity import DeviceInfo
+from homeassistant.helpers.update_coordinator import CoordinatorEntity
+
+import petsafe
+
+from . import PetSafeCoordinator, PetSafeData
+from .const import DOMAIN, FEEDER_MODEL_GEN1, MANUFACTURER
 
 
 class PetSafeSwitchEntity(CoordinatorEntity, SwitchEntity):
     def __init__(
         self,
-        hass,
-        api_name,
-        name,
-        coordinator,
-        device_type,
-        icon=None,
-        device_class=None,
-        entity_category=None,
+        hass: HomeAssistant,
+        api_name: str,
+        name: str,
+        coordinator: PetSafeCoordinator,
+        device_type: str,
+        icon: str = None,
+        device_class: str = None,
+        entity_category: str = None,
     ):
         super().__init__(coordinator)
         self._attr_name = name
@@ -35,14 +39,14 @@ class PetSafeSwitchEntity(CoordinatorEntity, SwitchEntity):
 class PetSafeLitterboxSwitchEntity(PetSafeSwitchEntity):
     def __init__(
         self,
-        hass,
-        name,
-        coordinator,
-        device_type,
+        hass: HomeAssistant,
+        name: str,
+        coordinator: PetSafeCoordinator,
+        device_type: str,
         device: petsafe.devices.DeviceScoopfree,
-        icon=None,
-        device_class=None,
-        entity_category=None,
+        icon: str = None,
+        device_class: str = None,
+        entity_category: str = None,
     ):
         self._litterbox = device
 
@@ -61,8 +65,8 @@ class PetSafeLitterboxSwitchEntity(PetSafeSwitchEntity):
             identifiers={(DOMAIN, device.api_name)},
             manufacturer=MANUFACTURER,
             name=device.friendly_name,
-            model=device.data["productName"],
-            sw_version=device.data["shadow"]["state"]["reported"]["firmware"],
+            model=device.product_name,
+            sw_version=device.firmware,
         )
 
     def _handle_coordinator_update(self) -> None:
@@ -78,14 +82,14 @@ class PetSafeLitterboxSwitchEntity(PetSafeSwitchEntity):
 class PetSafeFeederSwitchEntity(PetSafeSwitchEntity):
     def __init__(
         self,
-        hass,
-        name,
-        coordinator,
-        device_type,
+        hass: HomeAssistant,
+        name: str,
+        coordinator: PetSafeCoordinator,
+        device_type: str,
         device: petsafe.devices.DeviceSmartFeed,
-        icon=None,
-        device_class=None,
-        entity_category=None,
+        icon: str = None,
+        device_class: str = None,
+        entity_category: str = None,
     ):
         self._feeder = device
 
@@ -104,8 +108,9 @@ class PetSafeFeederSwitchEntity(PetSafeSwitchEntity):
             identifiers={(DOMAIN, device.api_name)},
             manufacturer=MANUFACTURER,
             name=device.friendly_name,
-            sw_version=device.data["firmware_version"],
-            model=device.data["product_name"],
+            sw_version=device.firmware,
+            # NB: Gen1 smart feeders do not report a product_name
+            model=device.product_name or FEEDER_MODEL_GEN1,
         )
         self._device = device
 
@@ -115,32 +120,30 @@ class PetSafeFeederSwitchEntity(PetSafeSwitchEntity):
             x for x in data.feeders if x.api_name == self._api_name
         )
         if self._device_type == "child_lock":
-            self._attr_is_on = feeder.child_lock
+            self._attr_is_on = feeder.is_locked
         elif self._device_type == "feeding_paused":
-            self._attr_is_on = feeder.paused
+            self._attr_is_on = feeder.is_paused
+        elif self._device_type == "slow_feed":
+            self._attr_is_on = feeder.is_slow_feed
 
         self.schedule_update_ha_state(True)
         return super()._handle_coordinator_update()
 
     async def async_update(self) -> None:
-
-        if self._attr_device_class == "timestamp":
-            data: PetSafeData = self.coordinator.data
-            feeder: petsafe.devices.DeviceSmartFeed = next(
-                x for x in data.feeders if x.api_name == self._api_name
-            )
-            feeding = await self.hass.async_add_executor_job(feeder.get_last_feeding)
-
         return await super().async_update()
 
-    def turn_on(self, **kwargs: Any) -> None:
+    async def async_turn_on(self, **kwargs: Any) -> None:
         if self._device_type == "child_lock":
-            self._device.child_lock = True
+            await self._device.lock(True)
         elif self._device_type == "feeding_paused":
-            self._device.paused = True
+            await self._device.pause(True)
+        elif self._device_type == "slow_feed":
+            await self._device.slow_feed(True)
 
-    def turn_off(self, **kwargs: Any) -> None:
+    async def async_turn_off(self, **kwargs: Any) -> None:
         if self._device_type == "child_lock":
-            self._device.child_lock = False
+            await self._device.lock(False)
         elif self._device_type == "feeding_paused":
-            self._device.paused = False
+            await self._device.pause(False)
+        elif self._device_type == "slow_feed":
+            await self._device.slow_feed(False)

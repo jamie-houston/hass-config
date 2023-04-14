@@ -1,33 +1,40 @@
-import time
-from homeassistant.helpers.update_coordinator import CoordinatorEntity
-from homeassistant.components.sensor import SensorEntity
-from homeassistant.helpers.entity import DeviceInfo
-import petsafe
 import datetime
+import time
+
+import pytz
+from homeassistant.components.sensor import SensorEntity
+from homeassistant.const import PERCENTAGE, SIGNAL_STRENGTH_DECIBELS
+from homeassistant.core import HomeAssistant
+from homeassistant.helpers.entity import DeviceInfo
+from homeassistant.helpers.update_coordinator import CoordinatorEntity
+
+import petsafe
+
+from . import PetSafeCoordinator, PetSafeData
 from .const import (
     CAT_IN_BOX,
     DOMAIN,
     ERROR_SENSOR_BLOCKED,
+    FEEDER_MODEL_GEN1,
+    FEEDER_MODEL_GEN2,
     MANUFACTURER,
     RAKE_BUTTON_DETECTED,
     RAKE_FINISHED,
     RAKE_NOW,
 )
-from . import PetSafeData
-import pytz
 
 
 class PetSafeSensorEntity(CoordinatorEntity, SensorEntity):
     def __init__(
         self,
-        hass,
-        api_name,
-        name,
-        coordinator,
-        device_type,
-        icon=None,
-        device_class=None,
-        entity_category=None,
+        hass: HomeAssistant,
+        api_name: str,
+        name: str,
+        coordinator: PetSafeCoordinator,
+        device_type: str,
+        icon: str = None,
+        device_class: str = None,
+        entity_category: str = None,
     ):
         super().__init__(coordinator)
         self._attr_name = name
@@ -40,18 +47,23 @@ class PetSafeSensorEntity(CoordinatorEntity, SensorEntity):
         self._device_type = device_type
         self._attr_entity_category = entity_category
 
+        if device_class == "signal_strength":
+            self._attr_native_unit_of_measurement = SIGNAL_STRENGTH_DECIBELS
+        elif device_class == "battery":
+            self._attr_native_unit_of_measurement = PERCENTAGE
+
 
 class PetSafeLitterboxSensorEntity(PetSafeSensorEntity):
     def __init__(
         self,
-        hass,
-        name,
-        coordinator,
-        device_type,
+        hass: HomeAssistant,
+        name: str,
+        coordinator: PetSafeCoordinator,
+        device_type: str,
         device: petsafe.devices.DeviceScoopfree,
-        icon=None,
-        device_class=None,
-        entity_category=None,
+        icon: str = None,
+        device_class: str = None,
+        entity_category: str = None,
     ):
         self._litterbox = device
 
@@ -70,8 +82,8 @@ class PetSafeLitterboxSensorEntity(PetSafeSensorEntity):
             identifiers={(DOMAIN, device.api_name)},
             manufacturer=MANUFACTURER,
             name=device.friendly_name,
-            model=device.data["productName"],
-            sw_version=device.data["shadow"]["state"]["reported"]["firmware"],
+            model=device.product_name,
+            sw_version=device.firmware,
         )
 
         if self._device_type == "last_cleaning" or self._device_type == "rake_status":
@@ -105,7 +117,7 @@ class PetSafeLitterboxSensorEntity(PetSafeSensorEntity):
             litterbox: petsafe.devices.DeviceScoopfree = next(
                 x for x in data.litterboxes if x.api_name == self._api_name
             )
-            events = await self.hass.async_add_executor_job(litterbox.get_activity)
+            events = await litterbox.get_activity()
             reversed_events = reversed(events["data"])
             for item in reversed_events:
                 if item["payload"]["code"] == RAKE_FINISHED:
@@ -118,7 +130,7 @@ class PetSafeLitterboxSensorEntity(PetSafeSensorEntity):
             litterbox: petsafe.devices.DeviceScoopfree = next(
                 x for x in data.litterboxes if x.api_name == self._api_name
             )
-            events = await self.hass.async_add_executor_job(litterbox.get_activity)
+            events = await litterbox.get_activity()
             reversed_events = reversed(events["data"])
             status = None
             for item in reversed_events:
@@ -150,14 +162,14 @@ class PetSafeLitterboxSensorEntity(PetSafeSensorEntity):
 class PetSafeFeederSensorEntity(PetSafeSensorEntity):
     def __init__(
         self,
-        hass,
-        name,
-        coordinator,
-        device_type,
+        hass: HomeAssistant,
+        name: str,
+        coordinator: PetSafeCoordinator,
+        device_type: str,
         device: petsafe.devices.DeviceSmartFeed,
-        icon=None,
-        device_class=None,
-        entity_category=None,
+        icon: str = None,
+        device_class: str = None,
+        entity_category: str = None,
     ):
         self._feeder = device
 
@@ -176,8 +188,9 @@ class PetSafeFeederSensorEntity(PetSafeSensorEntity):
             identifiers={(DOMAIN, device.api_name)},
             manufacturer=MANUFACTURER,
             name=device.friendly_name,
-            sw_version=device.data["firmware_version"],
-            model=device.data["product_name"],
+            sw_version=device.firmware,
+            # NB: Gen1 smart feeders do not report a product_name
+            model=device.product_name or FEEDER_MODEL_GEN1,
         )
 
         if self._device_type == "last_feeding":
@@ -216,8 +229,7 @@ class PetSafeFeederSensorEntity(PetSafeSensorEntity):
             feeder: petsafe.devices.DeviceSmartFeed = next(
                 x for x in data.feeders if x.api_name == self._api_name
             )
-            test = await self.hass.async_add_executor_job(feeder.get_messages_since)
-            feeding = await self.hass.async_add_executor_job(feeder.get_last_feeding)
+            feeding = await feeder.get_last_feeding()
             self._attr_native_value = datetime.datetime.fromtimestamp(
                 feeding["payload"]["time"], pytz.timezone("UTC")
             )

@@ -1,5 +1,5 @@
 type: gauge
-entity: sensor.none_balance_power_usage_1d
+entity: sensor.total_power_usage_1d
 name: Power Consumption
 severity:
   green: 0

@@ -1,25 +1,25 @@
-from homeassistant.core import HomeAssistant
-import petsafe
-from . import SensorEntities
-from .const import DOMAIN
+from datetime import timedelta
+from homeassistant.config_entries import ConfigEntry
 
-from . import PetSafeCoordinator
+from homeassistant.core import HomeAssistant
+from homeassistant.exceptions import ConfigEntryNotReady
 from homeassistant.helpers.entity import EntityCategory
 
-
-from datetime import timedelta
+from . import PetSafeCoordinator, SensorEntities
+from .const import DOMAIN
 
 SCAN_INTERVAL = timedelta(seconds=60)
 
 
-async def async_setup_entry(hass: HomeAssistant, config, add_entities):
+async def async_setup_entry(hass: HomeAssistant, config: ConfigEntry, add_entities):
     coordinator: PetSafeCoordinator = hass.data[DOMAIN][config.entry_id]
-    api: petsafe.PetSafeClient = coordinator.api
-
-    feeders = await hass.async_add_executor_job(petsafe.devices.get_feeders, api)
-    litterboxes = await hass.async_add_executor_job(
-        petsafe.devices.get_litterboxes, api
-    )
+    feeders = None
+    litterboxes = None
+    try:
+        feeders = await coordinator.get_feeders()
+        litterboxes = await coordinator.get_litterboxes()
+    except Exception as ex:
+        raise ConfigEntryNotReady("Failed to retrieve PetSafe devices") from ex
 
     entities = []
     for feeder in feeders:

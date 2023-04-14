@@ -1,0 +1,14 @@
+#################################  Notifications ###################################
+# https://community.home-assistant.io/t/simple-and-effective-alerting/394027
+- name: Notify_Information_Devices
+  platform: group
+  services:
+    - service: mobile_app_s22u_phone
+- name: Notify_Warning_Devices
+  platform: group
+  services:
+    - service: mobile_app_s22u_phone
+- name: Notify_Critical_Devices
+  platform: group
+  services:
+    - service: mobile_app_s22u_phone

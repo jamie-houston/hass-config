@@ -81,8 +81,21 @@ Example (Kitchen)
 - media_player.kitchen
 
 
+## Alerts and Notifications
+https://community.home-assistant.io/t/simple-and-effective-alerting/394027
 
-### To contemplate
+Notifications/alerts to show on dashboard and/or send to devices
+
+Steps
+1. Define entity/group for notification
+1. Define input_boolean for each notification (show/dismiss) - input_boolean/notifications/
+2. Define template with binary_sensor including entity to check and input_boolean to show
+  - binary sensor for each entity/group to check
+  - trigger (optional) for when to check binary_sensor
+- notifications.yaml for notification levels "Notify_<Information, Warning, Critical>_Devices"
+3. View
+
+## To contemplate
 Groups
 light.basement_lights
 light.play_room_light

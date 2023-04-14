@@ -14,6 +14,9 @@ cards:
       {% else %} 
         yellow
       {% endif %}
+    tap_action:
+      action: navigate
+      navigation_path: garage
   - type: conditional
     conditions:
       - entity: binary_sensor.volvo_xc90_battery_charging

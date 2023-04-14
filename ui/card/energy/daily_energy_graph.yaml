@@ -1,4 +1,14 @@
-type: history-graph
-entities:
-  - entity: sensor.none_123_1d
-hours_to_show: 72
+type: custom:auto-entities
+filter:
+  include:
+    - entity_id: '*.power_usage_*1d'
+  exclude: []
+card:
+  chart_type: line
+  period: hour
+  days_to_show: 1
+  type: statistics-graph
+  stat_types:
+    - state
+    - mean
+  title: Daily Energy Usage

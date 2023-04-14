@@ -1,0 +1,23 @@
+---
+#
+# Configuration for testing everything
+#
+template:
+  binary_sensor:
+    - name: Test Binary Sensor Alert Active
+      unique_id: test_binary_sensor_alert_active
+      state: "{{ is_state('input_boolean.test_entity_active', 'on') and is_state('input_boolean.test_notify_information', 'on') }}"
+
+input_boolean:
+  test_notify_information:
+    name: Test Notify Information
+    icon: mdi:information
+  test_notify_warning:
+    name: Test Notify Warning
+    icon: mdi:warning
+  test_notify_critical:
+    name: Test Notify Critical
+    icon: mdi:error
+  test_entity_active:
+    name: Test Entity Active
+    icon: mdi:question

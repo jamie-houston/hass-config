@@ -1,5 +1,5 @@
 - id: '1665445926808'
-  alias: To floor hallway light
+  alias: Top floor hallway light
   description: ''
   trigger:
   - type: occupied
@@ -35,3 +35,117 @@
         data: {}
         target:
           entity_id: light.holiday_lights
+- id: '1676339674650'
+  alias: Silas dashboard
+  description: ''
+  trigger: []
+  condition: []
+  action:
+  - service: media_player.play_media
+    target:
+      entity_id: media_player.kitchen_display
+    data:
+      media_content_id: mobile-dashboard/silass-bedroom
+      media_content_type: lovelace
+    metadata:
+      title: Silas's Bedroom
+      thumbnail: https://brands.home-assistant.io/_/lovelace/logo.png
+      media_class: app
+      children_media_class:
+      navigateIds:
+      - {}
+      - media_content_type: lovelace
+        media_content_id: ''
+      - media_content_type: lovelace
+        media_content_id: mobile-dashboard
+  mode: single
+- id: '1676339713348'
+  alias: Kitchen dashboard
+  description: ''
+  trigger: []
+  condition: []
+  action:
+  - service: media_player.play_media
+    target:
+      entity_id: media_player.kitchen_google_hub
+    data:
+      media_content_id: control-yaml/0
+      media_content_type: lovelace
+    metadata:
+      title: Home
+      thumbnail: https://brands.home-assistant.io/_/lovelace/logo.png
+      media_class: app
+      children_media_class:
+      navigateIds:
+      - {}
+      - media_content_type: lovelace
+        media_content_id: ''
+      - media_content_type: lovelace
+        media_content_id: control-yaml
+  mode: single
+- id: '1678200472310'
+  alias: Cast to Kitchen Hub
+  description: Cast Dashboard to Kitchen
+  use_blueprint:
+    path: kind3r/cast-and-re-cast-a-lovelace-view-to-a-google-hub.yaml
+    input:
+      player: media_player.kitchen_google_hub
+      view: tablet
+      dashboard: control_center
+- id: '1678571098180'
+  alias: Nola's bedroom nightlight toggle
+  description: ''
+  trigger:
+  - platform: device
+    device_id: 73754e801fc1e4471bb65e338a92b48c
+    domain: zwave_js
+    type: event.value_notification.central_scene
+    property: scene
+    property_key: '001'
+    endpoint: 0
+    command_class: 91
+    subtype: Endpoint 0 Scene 001
+  condition: []
+  action:
+  - type: toggle
+    device_id: 03f2f866c2dbb37d416b4d6e4cb586dc
+    entity_id: light.office_can
+    domain: light
+  mode: single
+- id: '1678571268743'
+  alias: Nola's bedroom scene night light
+  description: ''
+  trigger:
+  - platform: device
+    device_id: 73754e801fc1e4471bb65e338a92b48c
+    domain: zwave_js
+    type: event.value_notification.central_scene
+    property: scene
+    property_key: '001'
+    endpoint: 0
+    command_class: 91
+    subtype: Endpoint 0 Scene 001
+  condition: []
+  action:
+  - type: toggle
+    device_id: 03f2f866c2dbb37d416b4d6e4cb586dc
+    entity_id: light.office_can
+    domain: light
+  mode: single
+- id: '1681414049239'
+  alias: Front Doorbell on TV
+  description: ''
+  trigger:
+  - platform: device
+    device_id: 036f3bc6ff5056842e0ec901e5b350ee
+    domain: nest
+    type: doorbell_chime
+  condition: []
+  action:
+  - service: camera.play_stream
+    data:
+      format: hls
+      media_player: media_player.family_room_samsung_tv
+    target:
+      entity_id: camera.front_door
+  mode: single

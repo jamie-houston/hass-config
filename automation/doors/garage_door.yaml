@@ -1,0 +1,23 @@
+- alias: Nightly Garage Door Check
+  description: ""
+  mode: single
+  trigger:
+    - platform: time
+      at: "13:40:00"
+  condition:
+    - condition: and
+      conditions:
+        - condition: state
+          entity_id: binary_sensor.garage_door_alert_active
+          state: "on"
+        - condition: state
+          entity_id: input_boolean.garage_door_notify
+          state: "on"
+  action:
+    - service: notify.STD_Information
+      data:
+        message: >
+          Garage Door open for {{ relative_time(states.binary_sensor.garage_door_alert_active.last_changed) }} \  
+          Alerts on: {{ expand('group.garage_doors') | selectattr('state', 'eq', 'on') | map(attribute='attributes.friendly_name') | list | join(', ') }} \ 
+          Triggered: {{ as_timestamp(states.binary_sensor.garage_door_alert_active.last_changed) | timestamp_custom('%A %I:%M%p (%d-%b-%Y)') }}
+        title: "7580 Info - Garage Door Open"

@@ -1,21 +1,24 @@
-from homeassistant.helpers.update_coordinator import CoordinatorEntity
 from homeassistant.components.button import ButtonEntity
+from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity import DeviceInfo
+from homeassistant.helpers.update_coordinator import CoordinatorEntity
+
 import petsafe
-from .const import DOMAIN, MANUFACTURER
+
 from . import PetSafeCoordinator
+from .const import DOMAIN, FEEDER_MODEL_GEN1, MANUFACTURER
 
 
 class PetSafeButtonEntity(CoordinatorEntity, ButtonEntity):
     def __init__(
         self,
-        hass,
-        api_name,
-        name,
+        hass: HomeAssistant,
+        api_name: str,
+        name: str,
         coordinator: PetSafeCoordinator,
-        device_type,
-        icon=None,
-        device_class=None,
+        device_type: str,
+        icon: str = None,
+        device_class: str = None,
     ):
         super().__init__(coordinator)
         self._attr_name = name
@@ -32,13 +35,13 @@ class PetSafeButtonEntity(CoordinatorEntity, ButtonEntity):
 class PetSafeLitterboxButtonEntity(PetSafeButtonEntity):
     def __init__(
         self,
-        hass,
-        name,
+        hass: HomeAssistant,
+        name: str,
         coordinator: PetSafeCoordinator,
-        device_type,
+        device_type: str,
         device: petsafe.devices.DeviceScoopfree,
-        icon=None,
-        device_class=None,
+        icon: str = None,
+        device_class: str = None,
     ):
         self._litterbox = device
 
@@ -56,15 +59,15 @@ class PetSafeLitterboxButtonEntity(PetSafeButtonEntity):
             identifiers={(DOMAIN, device.api_name)},
             manufacturer=MANUFACTURER,
             name=device.friendly_name,
-            model=device.data["productName"],
-            sw_version=device.data["shadow"]["state"]["reported"]["firmware"],
+            model=device.product_name,
+            sw_version=device.firmware,
         )
 
     async def async_press(self) -> None:
         if self._device_type == "reset":
-            await self.hass.async_add_executor_job(self._device.reset, 0, False)
+            await self._device.reset(0, False)
         elif self._device_type == "clean":
-            await self.hass.async_add_executor_job(self._device.rake, False)
+            await self._device.rake(False)
         await self.coordinator.async_request_refresh()
 
 
@@ -96,11 +99,11 @@ class PetSafeFeederButtonEntity(PetSafeButtonEntity):
             identifiers={(DOMAIN, device.api_name)},
             manufacturer=MANUFACTURER,
             name=device.friendly_name,
-            sw_version=device.data["firmware_version"],
-            model=device.data["product_name"],
+            sw_version=device.firmware,
+            model=device.product_name or FEEDER_MODEL_GEN1,
         )
 
     async def async_press(self) -> None:
         if self._device_type == "feed":
-            await self.hass.async_add_executor_job(self._device.feed, 1, None, False)
+            await self._device.feed(1, None, False)
         await self.coordinator.async_request_refresh()

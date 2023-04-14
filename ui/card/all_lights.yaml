@@ -2,9 +2,11 @@ type: custom:auto-entities
 card:
   type: entities
   title: Lights
+sort:
+  method: entity_id
 filter:
   include:
     - entity_id: light.*lights
       options:
         type: custom:fold-entity-row
-
+      state: "on"

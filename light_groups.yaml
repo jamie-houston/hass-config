@@ -1,8 +1,10 @@
 - platform: group
-  name: Front Yard Lights
+  name: All House Lights
   entities:
-    - light.front_door
-    - light.front_porch_can
+    - light.basement_lights
+    - light.main_floor_lights
+    - light.top_floor_lights
+    - light.exterior_lights
 
 - platform: group
   name: Backyard Lights
@@ -11,28 +13,6 @@
     - light.driveway
     - light.backyard_string
     - light.backyard_garage_string
-
-- platform: group
-  name: Holiday Lights
-  entities:
-    - light.front_porch_plug_black
-    - light.house_holiday_lights
-    - light.front_porch_plug_white
-    - light.wled_house
-
-- platform: group
-  name: Night Lights
-  entities:
-    - light.front_yard_lights
-    - light.entryway
-    - light.driveway
-
-- platform: group
-  name: Exterior Lights
-  entities:
-    - light.backyard_lights
-    - light.front_yard_lights
-    - light.holiday_lights
 
 - platform: group
   name: Basement Lights
@@ -45,34 +25,25 @@
     - light.maker_space
 
 - platform: group
-  name: Master Bathroom Lights
+  name: Exterior Lights
   entities:
-    - light.master_bathroom
-    - light.master_bathroom_shower
-    - light.master_bathroom_toilet
-    - light.jamie_closet
+    - light.backyard_lights
+    - light.front_yard_lights
+    - light.holiday_lights
 
 - platform: group
-  name: Master Bedroom Lights
+  name: Front Yard Lights
   entities:
-    - light.master_bedroom_can
-    - light.master_bedroom_center
-    - light.lisa_closet
+    - light.front_door
+    - light.front_porch_can
 
 - platform: group
-  name: Top Floor Lights
+  name: Holiday Lights
   entities:
-    - light.girls_bathroom
-    - light.girls_bathroom_toilet
-    - light.nola_bedroom
-    - light.parker_bedroom
-    - light.parker_closet
-    - light.laundry_room
-    - light.top_floor_hallway
-    - light.master_bedroom_lights
-    - light.master_bathroom_lights
-    - light.silas_bathroom
-    - light.silas_bedroom
+    - light.front_porch_plug_black
+    - light.house_holiday_lights
+    - light.front_porch_plug_white
+    - light.wled_house
 
 - platform: group
   name: Kitchen Lights
@@ -83,12 +54,6 @@
     - light.kitchen_counter
     - light.mud_room
     - light.kitchen_island
-
-- platform: group
-  name: Office Lights
-  entities:
-    - light.office_can
-    - light.office_center
 
 - platform: group
   name: Main Floor Lights
@@ -104,9 +69,44 @@
     - light.main_floor_closet
 
 - platform: group
-  name: All House Lights
+  name: Primary Bathroom Lights
   entities:
-    - light.basement_lights
-    - light.main_floor_lights
-    - light.top_floor_lights
-    - light.exterior_lights
+    - light.primary_bathroom
+    - light.primary_bathroom_shower
+    - light.primary_bathroom_toilet
+    - light.jamie_closet
+
+- platform: group
+  name: Primary Bedroom Lights
+  entities:
+    - light.primary_bedroom_can
+    - light.primary_bedroom_center
+    - light.lisa_closet
+
+- platform: group
+  name: Night Lights
+  entities:
+    - light.front_yard_lights
+    - light.entryway
+    - light.driveway
+
+- platform: group
+  name: Office Lights
+  entities:
+    - light.office_can
+    - light.office_center
+
+- platform: group
+  name: Top Floor Lights
+  entities:
+    - light.girls_bathroom
+    - light.girls_bathroom_toilet
+    - light.nola_bedroom
+    - light.parker_bedroom
+    - light.parker_closet
+    - light.laundry_room
+    - light.top_floor_hallway
+    - light.primary_bedroom_lights
+    - light.primary_bathroom_lights
+    - light.silas_bathroom
+    - light.silas_bedroom

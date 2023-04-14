@@ -1,0 +1,11 @@
+type: grid
+square: false
+columns: 1
+cards:
+  - show_state: true
+    show_name: true
+    camera_view: auto
+    type: picture-entity
+    entity: camera.backyard
+  - type: picture-entity
+    entity: camera.front_door

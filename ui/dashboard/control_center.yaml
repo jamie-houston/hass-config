@@ -1,15 +1,32 @@
 views:
   - theme: Backend-selected
-    title: Home
-    icon: mdi:home
+    title: Phone
     badges: []
     cards:
-      - !include ../card/weather.yaml
+      - !include ../card/climate/weather_small.yaml
       - !include ../card/quick_nav.yaml
       - !include ../card/areas.yaml
+      - !include ../card/device/low_battery.yaml
+      - !include ../card/device/alert_view.yaml
+  - title: Tablet
+    path: tablet
+    type: custom:masonry-layout
+    theme: minimalist-desktop
+    cards:
+      - !include ../card/climate/weather_large.yaml
+      - !include ../card/quick_nav.yaml
+      - !include ../card/family/people.yaml
+      - !include ../card/areas.yaml
+      - !include ../card/device/low_battery.yaml
+      - !include ../card/device/alert_view.yaml
+      - !include ../card/family/calendar.yaml
+      - !include ../card/network/current_speed.yaml
+      - !include ../card/xc90_charging.yaml
+      - !include ../card/exterior/cameras.yaml
   - title: Climate
     subview: true
     path: climate
+    theme: minimalist-desktop
     cards:
       - type: custom:clock-weather-card
         entity: weather.home
@@ -30,7 +47,6 @@ views:
     path: tasks
     cards:
       - !include ../card/todo.yaml
-      - !include ../card/xc90_charging.yaml
   - title: Garage
     subview: true
     path: garage
@@ -55,3 +71,14 @@ views:
     cards:
       - !include ../card/network/current_speed.yaml
       - !include ../card/network/history_speed.yaml
+  - title: Outside
+    subview: true
+    path: exterior
+    cards:
+      - !include ../card/exterior/cameras.yaml
+      - !include ../card/xc90.yaml
+  - title: Basement
+    path: basement
+    subview: true
+    cards:
+      - !include ../card/floorplan/basement.yaml

@@ -1,0 +1,36 @@
+{
+    "config": {
+        "abort": {
+            "already_configured": "Device is already configured"
+        },
+        "error": {
+            "cannot_connect": "Failed to connect",
+            "invalid_auth": "Invalid authentication",
+            "unknown": "Unexpected error"
+        },
+        "step": {
+            "user": {
+                "data": {
+                    "email": "Email",
+                    "password": "Password"
+
+                }
+            },
+            "code_type": {
+                "data": {
+                    "code_type": "How would you like to receive your verification code?"
+                }
+            },
+            "code": {
+                "data": {
+                    "code": "Verification Code"
+                }
+            },
+            "select_home": {
+                "data": {
+                    "home_id": "Home"
+                }
+            }
+        }
+    }
+}

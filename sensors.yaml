@@ -13,10 +13,16 @@
 #   away_timeout: 120 # number of seconds after which the enitity will get status not_home
 - platform: mqtt_room
   device_id: "iBeacon:a4220523-cfa8-4593-a1f0-75460c2e681a-100-1"
-  name: "Jamie S22"
-  state_topic: "espresense/devices/iBeacon:a4220523-cfa8-4593-a1f0-75460c2e681a-100-1"
+  name: "Jamie S22 Companion App"
+  state_topic: "espresense/rooms"
   timeout: 5
   away_timeout: 120 # number of seconds after which the enitity will get status not_home
+# - platform: mqtt_room
+#   device_id: "espresense/devices/samsung:616e3b6214a6"
+#   name: "Jamie S22 Ultra Tracker"
+#   state_topic: "espresense/devices/samsung:5959fa4d9972"
+#   timeout: 5
+  # away_timeout: 120 # number of seconds after which the enitity will get status not_home
 - platform: systemmonitor
   resources:
     - type: disk_free
@@ -27,3 +33,37 @@
     - type: memory_use
     - type: processor_temperature
     - type: processor_use
+- platform: history_stats
+  name: "Jamie S22 Interactive History"
+  entity_id: binary_sensor.s22u_interactive
+  state: "on"
+  type: time
+  start: "{{ now().replace(hour=0, minute=0, second=0) }}"
+  end: "{{ now() }}"
+- platform: history_stats
+  name: "Nola Fire10 Interactive History"
+  entity_id: binary_sensor.nola_fire_10_interactive
+  state: "on"
+  type: time
+  start: "{{ now().replace(hour=0, minute=0, second=0) }}"
+  end: "{{ now() }}"
+- platform: history_stats
+  name: "Parker Fire10 Interactive History"
+  entity_id: binary_sensor.parker_fire_10_interactive
+  state: "on"
+  type: time
+  start: "{{ now().replace(hour=0, minute=0, second=0) }}"
+  end: "{{ now() }}"
+- platform: history_stats
+  name: "Silas S21 Interactive History"
+  entity_id: binary_sensor.s21_fe_interactive  
+  state: "on"
+  type: time
+  start: "{{ now().replace(hour=0, minute=0, second=0) }}"
+  end: "{{ now() }}"
+- platform: google_keep
+  username: !secret google_username
+  password: !secret google_password
+  labels:
+    - 'Home Assistant'
+  pinned: true

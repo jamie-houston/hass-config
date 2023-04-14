@@ -1,0 +1,8 @@
+type: calendar
+title: Family Calendar
+initial_view: listWeek
+entities:
+  - calendar.family
+  - calendar.houston_family_nanny_schedule
+  - calendar.silas_baseball
+  - calendar.lisa_houston31_gmail_com

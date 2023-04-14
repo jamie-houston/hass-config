@@ -1,24 +1,28 @@
-from homeassistant.helpers.update_coordinator import CoordinatorEntity
-from homeassistant.components.select import SelectEntity
-from homeassistant.helpers.entity import DeviceInfo
-import petsafe
-from .const import DOMAIN, MANUFACTURER
-from . import PetSafeData
 from typing import Any
+
+from homeassistant.components.select import SelectEntity
+from homeassistant.core import HomeAssistant
+from homeassistant.helpers.entity import DeviceInfo
+from homeassistant.helpers.update_coordinator import CoordinatorEntity
+
+import petsafe
+
+from . import PetSafeCoordinator, PetSafeData
+from .const import DOMAIN, MANUFACTURER
 
 
 class PetSafeSelectEntity(CoordinatorEntity, SelectEntity):
     def __init__(
         self,
-        hass,
-        api_name,
-        name,
-        coordinator,
-        device_type,
-        options,
-        icon=None,
-        device_class=None,
-        entity_category=None,
+        hass: HomeAssistant,
+        api_name: str,
+        name: str,
+        coordinator: PetSafeCoordinator,
+        device_type: str,
+        options: list[str],
+        icon: str = None,
+        device_class: str = None,
+        entity_category: str = None,
     ):
         super().__init__(coordinator)
         self._attr_name = name
@@ -37,15 +41,15 @@ class PetSafeSelectEntity(CoordinatorEntity, SelectEntity):
 class PetSafeLitterboxSelectEntity(PetSafeSelectEntity):
     def __init__(
         self,
-        hass,
-        name,
-        coordinator,
-        device_type,
+        hass: HomeAssistant,
+        name: str,
+        coordinator: PetSafeCoordinator,
+        device_type: str,
         device: petsafe.devices.DeviceScoopfree,
-        options,
-        icon=None,
-        device_class=None,
-        entity_category=None,
+        options: list[str],
+        icon: str = None,
+        device_class: str = None,
+        entity_category: str = None,
     ):
         self._litterbox = device
 
@@ -65,8 +69,8 @@ class PetSafeLitterboxSelectEntity(PetSafeSelectEntity):
             identifiers={(DOMAIN, device.api_name)},
             manufacturer=MANUFACTURER,
             name=device.friendly_name,
-            model=device.data["productName"],
-            sw_version=device.data["shadow"]["state"]["reported"]["firmware"],
+            model=device.product_name,
+            sw_version=device.firmware,
         )
         self._attr_current_option = None
 
@@ -84,7 +88,5 @@ class PetSafeLitterboxSelectEntity(PetSafeSelectEntity):
 
     async def async_select_option(self, option: str) -> None:
         if self._device_type == "rake_timer":
-            await self.hass.async_add_executor_job(
-                self._litterbox.modify_timer, int(option), False
-            )
+            await self._litterbox.modify_timer(int(option), False)
         await self._coordinator.async_request_refresh()

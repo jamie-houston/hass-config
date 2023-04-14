@@ -1,0 +1,30 @@
+name: Test Info Alert Active
+entity_id: binary_sensor.test_binary_sensor_alert_active
+state: "on"
+repeat:
+  - 180
+can_acknowledge: true
+skip_first: true
+title: "This is a Info level test"
+message: >
+  This was updated at {{ relative_time(states.binary_sensor.test_binary_sensor_alert_active.last_changed) }} \  
+  Triggered: {{ as_timestamp(states.binary_sensor.test_binary_sensor_alert_active.last_changed) | timestamp_custom('%A %I:%M%p (%d-%b-%Y)') }}
+done_message: "Test Info Alert RESOLVED at {{ as_timestamp(states.binary_sensor.test_binary_sensor_alert_active.last_changed) | timestamp_custom('%A %I:%M%p (%d-%b-%Y)') }}"
+notifiers:
+  - Notify_Information_Devices
+
+# name: Garage Door Alert Active
+# entity_id: binary_sensor.garage_door_alert_active
+# state: "on"
+# repeat:
+#   - 180
+# can_acknowledge: true
+# skip_first: true
+# title: "7580 Info - Garage Door Open"
+# message: >
+#   Garage Door open for {{ relative_time(states.binary_sensor.garage_door_alert_active.last_changed) }} \  
+#   Alerts on: {{ expand('group.garage_doors') | selectattr('state', 'eq', 'on') | map(attribute='attributes.friendly_name') | list | join(', ') }} \ 
+#   Triggered: {{ as_timestamp(states.binary_sensor.garage_door_alert_active.last_changed) | timestamp_custom('%A %I:%M%p (%d-%b-%Y)') }}
+# done_message: "Garage Door Alert RESOLVED at {{ as_timestamp(states.binary_sensor.garage_door_alert_active.last_changed) | timestamp_custom('%A %I:%M%p (%d-%b-%Y)') }}"
+# notifiers:
+#   - Notify_Information_Devices

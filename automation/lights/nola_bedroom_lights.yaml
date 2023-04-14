@@ -1,0 +1,34 @@
+description: "Toggle Nola's Bedroom Night Light"
+alias: Z-Wave JS Scene Controller HANK Electronics SCN04
+use_blueprint:
+  path: >-
+    Net_Giant/hank-electronics-hkzw-scn04-4-button-scene-controller-for-z-wave-js.yaml
+  input:
+    scn04: 73754e801fc1e4471bb65e338a92b48c
+    button_1_press:
+      - type: toggle
+        device_id: 1d4d8fdece7df83a85058efcd4491a98
+        entity_id: switch.switchbot_032
+        domain: switch
+    button_2_press:
+      - type: toggle
+        device_id: 2d6eeab08ee159c32d55951524e56b8c
+        entity_id: light.nola_bedroom
+        domain: light
+# - description: "toggle nola's bedroom lamp"
+#   mode: single
+#   trigger:
+#     - platform: device
+#       device_id: 73754e801fc1e4471bb65e338a92b48c
+#       domain: zwave_js
+#       type: event.value_notification.central_scene
+#       property: scene
+#       property_key: "001"
+#       endpoint: 0
+#       command_class: 91
+#       subtype: Endpoint 0 Scene 001
+#   condition: []
+#   action:
+#     - type: toggle
+#       entity_id: switch.switchbot_032
+#       domain: switch

@@ -1,0 +1,31 @@
+esphome:
+  name: home-theater-spider
+  friendly_name: Home Theater Spider
+
+esp32:
+  board: esp32dev
+  framework:
+    type: arduino
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: "2D9SyhXsTozqJztKMI5B9oOr9GVQblePdvCBHy+hbqY="
+
+ota:
+  password: "2494bd0514fa56ef3df2834a06c9a56c"
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Home-Theater-Spider"
+    password: "YLm8Ghp257Jd"
+
+captive_portal:
+    
